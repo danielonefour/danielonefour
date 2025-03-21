@@ -127,12 +127,14 @@ const Header = () => {
           </nav>
           
           <div className="mt-auto pb-6">
-            <a href="tel:1407894568" className="flex items-center text-black mb-6">
-              <div className="flex items-center justify-center mr-2">
-                <HiPhone size={18} />
-              </div>
-              <span className="font-medium">140 7894 568</span>
-            </a>
+            {companyDetails?.primaryPhoneNumber && (
+              <a href={`tel:${companyDetails?.primaryPhoneNumber}`} className="flex items-center text-black mb-6">
+                <div className="flex items-center justify-center mr-2">
+                  <HiPhone size={18} />
+                </div>
+                <span className="font-medium">{companyDetails?.primaryPhoneNumber}</span>
+              </a>
+            )}
             <HoleButton 
               href="/contact" 
               className="w-full justify-center"
