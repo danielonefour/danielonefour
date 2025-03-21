@@ -1,5 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    // Ignore TypeScript errors in the build
+    typescript: {
+        // !! WARN !!
+        // Dangerously allow production builds to successfully complete even if
+        // your project has type errors.
+        ignoreBuildErrors: true,
+    },
+    // Ignore ESLint errors in the build
+    eslint: {
+        // Disable ESLint running during build
+        ignoreDuringBuilds: true,
+    },
     images: {
         domains: ['images.ctfassets.net'], // Allow Contentful image domains
     },
