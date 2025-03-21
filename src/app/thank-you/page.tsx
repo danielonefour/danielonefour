@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -9,7 +9,39 @@ import aboutImage from '@/assets/images/about.png';
 import Link from 'next/link';
 import { FiCheck, FiMail, FiSend } from 'react-icons/fi';
 
-const ThankYouPage = () => {
+// Loading fallback component
+const ThankYouLoading = () => (
+  <>
+    <Header />
+    <main>
+      <PageHeader 
+        title="Thank You" 
+        image={aboutImage}
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Thank You', href: '/thank-you' },
+        ]}
+      />
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-6">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="animate-pulse">
+              <div className="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-8"></div>
+              <div className="h-8 bg-gray-200 rounded w-3/4 mx-auto mb-6"></div>
+              <div className="h-4 bg-gray-200 rounded w-full mx-auto mb-3"></div>
+              <div className="h-4 bg-gray-200 rounded w-5/6 mx-auto mb-3"></div>
+              <div className="h-4 bg-gray-200 rounded w-4/6 mx-auto mb-8"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </>
+);
+
+// Client component that uses useSearchParams
+const ThankYouContent = () => {
   const searchParams = useSearchParams();
   const [type, setType] = useState<string>('');
   
@@ -91,6 +123,15 @@ const ThankYouPage = () => {
       </main>
       <Footer />
     </>
+  );
+};
+
+// Main component with Suspense boundary
+const ThankYouPage = () => {
+  return (
+    <Suspense fallback={<ThankYouLoading />}>
+      <ThankYouContent />
+    </Suspense>
   );
 };
 
