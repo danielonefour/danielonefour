@@ -1,26 +1,166 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* Custom styles below this line */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    --foreground-rgb: 0, 0, 0;
+    --background-rgb: 255, 255, 255;
+    --header-bg-color: #e0f2fe;
+    --light-gray-color: #f8f8f8;
+    --brand-blue-color: #1699C1;
+    --brand-orange-color: #F9BE70;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-rgb: 0, 0, 0;
+    }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    color: rgb(var(--foreground-rgb));
+    background: rgb(var(--background-rgb));
+}
+
+/* Header styles */
+.header-button {
+    position: relative;
+    overflow: visible;
+    transition: all 0.3s ease;
+}
+
+.header-button:hover {
+    background-color: #333;
+}
+
+.header-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-color, #1599c1);
+    border-radius: 50%;
+    transform: translate(50%, -50%);
+}
+
+/* Hole Button styles */
+.hole-button {
+    position: relative;
+    overflow: visible;
+    transition: all 0.3s ease;
+    border-radius: 0;
+}
+
+.hole-button:hover {
+    background-color: #333;
+}
+
+.hole-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    width: 12px;
+    height: 12px;
+    background-color: var(--hole-bg-color, var(--light-gray-color));
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+/* Add our custom animations for the team section */
+@keyframes fadeSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-fade-in {
+    animation: scaleIn 0.5s ease-out forwards;
+}
+
+.animate-fade-slide-up {
+    animation: fadeSlideUp 0.5s ease-out forwards;
+}
+
+/* Blog Styling */
+@layer components {
+    .prose {
+        @apply text-gray-700;
+    }
+
+    .prose h1,
+    .prose h2,
+    .prose h3,
+    .prose h4,
+    .prose h5,
+    .prose h6 {
+        @apply font-bold text-black mt-8 mb-4;
+    }
+
+    .prose h3 {
+        @apply text-2xl;
+    }
+
+    .prose p {
+        @apply mb-6;
+    }
+
+    .prose ul,
+    .prose ol {
+        @apply mb-6 pl-6;
+    }
+
+    .prose ul {
+        @apply list-disc;
+    }
+
+    .prose ol {
+        @apply list-decimal;
+    }
+
+    .prose li {
+        @apply mb-2;
+    }
+
+    .prose blockquote {
+        @apply pl-6 border-l-4 border-gray-300 italic my-8;
+    }
+
+    .prose blockquote p {
+        @apply text-lg font-medium text-gray-800;
+    }
+
+    .prose blockquote cite {
+        @apply text-sm text-gray-600 mt-2 block;
+    }
+
+    .prose a {
+        @apply text-primary hover:underline;
+    }
+
+    .prose img {
+        @apply rounded-md my-8;
+    }
 }

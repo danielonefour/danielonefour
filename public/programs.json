@@ -1,0 +1,174 @@
+[
+  {
+    "id": "one-on-one",
+    "slug": "one-on-one",
+    "title": "One-on-One Coaching",
+    "shortDescription": "Personalized coaching sessions tailored to your specific goals and challenges.",
+    "fullDescription": "Our one-on-one coaching program offers a highly personalized approach to professional and personal development. Working directly with an experienced coach, you'll identify your key strengths, address challenges, and create actionable strategies to achieve your goals. Each session is customized to your unique situation, providing focused guidance and accountability throughout your journey.",
+    "image": "/placeholder-program-1.jpg",
+    "duration": "12 weeks",
+    "sessions": "Weekly 60-minute sessions",
+    "benefits": [
+      "Personalized attention and tailored strategies",
+      "Confidential environment to discuss challenges",
+      "Flexible scheduling to accommodate your needs",
+      "Direct feedback and accountability",
+      "Customized resources and tools"
+    ],
+    "features": [
+      "Initial assessment and goal-setting session",
+      "Weekly one-on-one coaching calls",
+      "Unlimited email support between sessions",
+      "Customized action plans and homework",
+      "Progress tracking and adjustments",
+      "Final evaluation and future planning session"
+    ],
+    "testimonials": [
+      {
+        "quote": "The one-on-one coaching program transformed my approach to leadership. I'm now more confident and effective than ever before.",
+        "author": "Sarah Johnson, CEO"
+      }
+    ],
+    "pricing": "$1,500 for 12-week program",
+    "featured": true,
+    "order": 1
+  },
+  {
+    "id": "group",
+    "slug": "group",
+    "title": "Group Coaching",
+    "shortDescription": "Collaborative learning environment with peers facing similar challenges.",
+    "fullDescription": "Our group coaching program brings together professionals with similar goals in a collaborative learning environment. Benefit from both expert guidance and peer insights as you work through challenges together. This program offers a cost-effective way to receive quality coaching while building valuable connections with like-minded individuals.",
+    "image": "/placeholder-program-2.jpg",
+    "duration": "8 weeks",
+    "sessions": "Weekly 90-minute group sessions",
+    "benefits": [
+      "Learning from diverse perspectives and experiences",
+      "Building a supportive professional network",
+      "Collaborative problem-solving opportunities",
+      "More affordable than one-on-one coaching",
+      "Accountability from both coach and peers"
+    ],
+    "features": [
+      "Small groups of 5-8 participants",
+      "Weekly facilitated group sessions",
+      "Shared resource library",
+      "Group exercises and discussions",
+      "Private online community for continued support",
+      "One individual check-in session midway"
+    ],
+    "testimonials": [
+      {
+        "quote": "The group dynamic added so much value to my coaching experience. I learned as much from my peers as I did from the coach.",
+        "author": "Michael Chen, Marketing Director"
+      }
+    ],
+    "pricing": "$750 for 8-week program",
+    "featured": true,
+    "order": 2
+  },
+  {
+    "id": "mindfulness",
+    "slug": "mindfulness",
+    "title": "Mindfulness Training",
+    "shortDescription": "Develop present-moment awareness to reduce stress and improve focus.",
+    "fullDescription": "Our mindfulness training program teaches practical techniques to cultivate awareness, reduce stress, and enhance focus in both professional and personal settings. Through guided meditation practices, breathing exercises, and mindful communication strategies, you'll learn to respond rather than react to challenging situations, leading to better decision-making and improved well-being.",
+    "image": "/placeholder-program-3.jpg",
+    "duration": "6 weeks",
+    "sessions": "Twice weekly 45-minute sessions",
+    "benefits": [
+      "Reduced stress and anxiety levels",
+      "Improved focus and concentration",
+      "Enhanced emotional regulation",
+      "Better communication skills",
+      "Greater self-awareness and presence"
+    ],
+    "features": [
+      "Introduction to various meditation techniques",
+      "Practical mindfulness exercises for workplace settings",
+      "Stress reduction strategies",
+      "Daily practice guidance and tracking",
+      "Digital meditation resources and recordings",
+      "Mindful communication workshop"
+    ],
+    "testimonials": [
+      {
+        "quote": "The mindfulness program gave me practical tools to manage stress and stay focused during challenging projects. It's been transformative.",
+        "author": "Emma Rodriguez, Project Manager"
+      }
+    ],
+    "pricing": "$500 for 6-week program",
+    "featured": true,
+    "order": 3
+  },
+  {
+    "id": "leadership",
+    "slug": "leadership",
+    "title": "Leadership Development",
+    "shortDescription": "Comprehensive training to develop effective leadership skills and strategies.",
+    "fullDescription": "The Leadership Development program is designed for emerging and established leaders who want to enhance their ability to inspire and guide teams effectively. Through a combination of theoretical frameworks, practical exercises, and personalized feedback, participants will develop a leadership style that aligns with their values and organizational needs. The program covers essential leadership competencies including strategic thinking, emotional intelligence, change management, and effective communication.",
+    "image": "/placeholder-program-4.jpg",
+    "duration": "16 weeks",
+    "sessions": "Weekly 2-hour workshops + monthly one-on-one sessions",
+    "benefits": [
+      "Develop a clear leadership vision and philosophy",
+      "Enhance team motivation and engagement strategies",
+      "Improve decision-making under pressure",
+      "Build stronger communication and influence skills",
+      "Learn to navigate complex organizational challenges"
+    ],
+    "features": [
+      "Comprehensive leadership assessment",
+      "Weekly interactive workshops",
+      "Monthly individual coaching sessions",
+      "Leadership simulation exercises",
+      "360-degree feedback process",
+      "Personalized leadership development plan",
+      "Access to leadership resource library"
+    ],
+    "testimonials": [
+      {
+        "quote": "This program completely transformed how I approach leadership. I've seen measurable improvements in team performance and morale since implementing what I learned.",
+        "author": "Robert Thompson, Department Director"
+      }
+    ],
+    "pricing": "$2,200 for 16-week program",
+    "featured": false,
+    "order": 4
+  },
+  {
+    "id": "career-transition",
+    "slug": "career-transition",
+    "title": "Career Transition Coaching",
+    "shortDescription": "Guidance and support for professionals navigating career changes and advancements.",
+    "fullDescription": "Our Career Transition Coaching program provides structured support for professionals at key inflection points in their careers. Whether you're seeking a promotion, switching industries, or completely reinventing your professional path, this program offers the tools, strategies, and confidence needed to navigate change successfully. Through personalized coaching and practical exercises, you'll clarify your career direction, identify transferable skills, and develop an effective transition strategy.",
+    "image": "/placeholder-program-5.jpg",
+    "duration": "10 weeks",
+    "sessions": "Bi-weekly 75-minute sessions",
+    "benefits": [
+      "Clarity about career direction and goals",
+      "Confidence in making strategic career decisions",
+      "Enhanced personal branding and self-presentation",
+      "Effective job search or internal advancement strategies",
+      "Reduced transition stress and uncertainty"
+    ],
+    "features": [
+      "Career assessment and skills inventory",
+      "Personal branding workshop",
+      "Resume and LinkedIn profile optimization",
+      "Interview preparation and practice",
+      "Networking strategy development",
+      "Salary negotiation techniques",
+      "First 90 days planning"
+    ],
+    "testimonials": [
+      {
+        "quote": "After 15 years in the same industry, making a change felt impossible. This program gave me the structure and confidence to successfully transition to a new role that better aligns with my values and goals.",
+        "author": "Patricia Lee, Senior Manager"
+      }
+    ],
+    "pricing": "$1,800 for 10-week program",
+    "featured": false,
+    "order": 5
+  }
+] 

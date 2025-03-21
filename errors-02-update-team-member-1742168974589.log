@@ -1,0 +1,309 @@
+BadRequest: {
+  "status": 400,
+  "statusText": "Bad Request",
+  "message": "The content type you sent could not be found or was not activated.",
+  "details": {},
+  "request": {
+    "url": "https://api.contentful.com/spaces/rqwpeakausv1/environments/master/content_types/teamMember/editor_interface",
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/vnd.contentful.management.v1+json",
+      "X-Contentful-User-Agent": "app contentful.migration-cli/4.28.1; feature migration-library; sdk contentful-management-plain.js/11.48.0; platform node.js/v20.18.1; os macOS/v20.18.1;",
+      "CF-Sequence": "f8a364ee-55b8-4c4a-b015-d3a5f08def29",
+      "Authorization": "Bearer ..._9ExY",
+      "X-Contentful-Version": "0",
+      "User-Agent": "axios/1.7.9",
+      "Content-Length": "85",
+      "Accept-Encoding": "gzip, compress, deflate, br"
+    },
+    "method": "put",
+    "payloadData": "{\"controls\":[{\"fieldId\":\"name\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"}]}"
+  },
+  "requestId": "34f9bf07-32ea-4473-aef7-15ea2e7fed44"
+}
+    at errorHandler (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:30884:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async makeRequest (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:4749:10)
+    at async Task.task (/Applications/projects/daniel-one-four/node_modules/contentful-migration/built/bin/cli.js:189:29)
+    at async Task.run (/Applications/projects/daniel-one-four/node_modules/listr2/dist/lib/task.js:213:21)
+    at async /Applications/projects/daniel-one-four/node_modules/p-map/index.js:57:22BadRequest: {
+  "status": 400,
+  "statusText": "Bad Request",
+  "message": "The content type you sent could not be found or was not activated.",
+  "details": {},
+  "request": {
+    "url": "https://api.contentful.com/spaces/rqwpeakausv1/environments/master/content_types/teamMember/editor_interface",
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/vnd.contentful.management.v1+json",
+      "X-Contentful-User-Agent": "app contentful.migration-cli/4.28.1; feature migration-library; sdk contentful-management-plain.js/11.48.0; platform node.js/v20.18.1; os macOS/v20.18.1;",
+      "CF-Sequence": "f8a364ee-55b8-4c4a-b015-d3a5f08def29",
+      "Authorization": "Bearer ..._9ExY",
+      "X-Contentful-Version": "1",
+      "User-Agent": "axios/1.7.9",
+      "Content-Length": "156",
+      "Accept-Encoding": "gzip, compress, deflate, br"
+    },
+    "method": "put",
+    "payloadData": "{\"controls\":[{\"fieldId\":\"name\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"slug\",\"widgetId\":\"slugEditor\",\"widgetNamespace\":\"builtin\"}]}"
+  },
+  "requestId": "2d2ce931-b238-474f-bb73-d0c427abf0de"
+}
+    at errorHandler (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:30884:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async makeRequest (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:4749:10)
+    at async Task.task (/Applications/projects/daniel-one-four/node_modules/contentful-migration/built/bin/cli.js:189:29)
+    at async Task.run (/Applications/projects/daniel-one-four/node_modules/listr2/dist/lib/task.js:213:21)
+    at async /Applications/projects/daniel-one-four/node_modules/p-map/index.js:57:22BadRequest: {
+  "status": 400,
+  "statusText": "Bad Request",
+  "message": "The content type you sent could not be found or was not activated.",
+  "details": {},
+  "request": {
+    "url": "https://api.contentful.com/spaces/rqwpeakausv1/environments/master/content_types/teamMember/editor_interface",
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/vnd.contentful.management.v1+json",
+      "X-Contentful-User-Agent": "app contentful.migration-cli/4.28.1; feature migration-library; sdk contentful-management-plain.js/11.48.0; platform node.js/v20.18.1; os macOS/v20.18.1;",
+      "CF-Sequence": "f8a364ee-55b8-4c4a-b015-d3a5f08def29",
+      "Authorization": "Bearer ..._9ExY",
+      "X-Contentful-Version": "2",
+      "User-Agent": "axios/1.7.9",
+      "Content-Length": "227",
+      "Accept-Encoding": "gzip, compress, deflate, br"
+    },
+    "method": "put",
+    "payloadData": "{\"controls\":[{\"fieldId\":\"name\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"slug\",\"widgetId\":\"slugEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"role\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"}]}"
+  },
+  "requestId": "f7bba559-36f5-45b9-b9d5-364454b5de98"
+}
+    at errorHandler (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:30884:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async makeRequest (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:4749:10)
+    at async Task.task (/Applications/projects/daniel-one-four/node_modules/contentful-migration/built/bin/cli.js:189:29)
+    at async Task.run (/Applications/projects/daniel-one-four/node_modules/listr2/dist/lib/task.js:213:21)
+    at async /Applications/projects/daniel-one-four/node_modules/p-map/index.js:57:22BadRequest: {
+  "status": 400,
+  "statusText": "Bad Request",
+  "message": "The content type you sent could not be found or was not activated.",
+  "details": {},
+  "request": {
+    "url": "https://api.contentful.com/spaces/rqwpeakausv1/environments/master/content_types/teamMember/editor_interface",
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/vnd.contentful.management.v1+json",
+      "X-Contentful-User-Agent": "app contentful.migration-cli/4.28.1; feature migration-library; sdk contentful-management-plain.js/11.48.0; platform node.js/v20.18.1; os macOS/v20.18.1;",
+      "CF-Sequence": "f8a364ee-55b8-4c4a-b015-d3a5f08def29",
+      "Authorization": "Bearer ..._9ExY",
+      "X-Contentful-Version": "3",
+      "User-Agent": "axios/1.7.9",
+      "Content-Length": "304",
+      "Accept-Encoding": "gzip, compress, deflate, br"
+    },
+    "method": "put",
+    "payloadData": "{\"controls\":[{\"fieldId\":\"name\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"slug\",\"widgetId\":\"slugEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"role\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"photo\",\"widgetId\":\"assetLinkEditor\",\"widgetNamespace\":\"builtin\"}]}"
+  },
+  "requestId": "91e7cb71-56fb-4fa0-8160-b8f1d80e745f"
+}
+    at errorHandler (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:30884:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async makeRequest (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:4749:10)
+    at async Task.task (/Applications/projects/daniel-one-four/node_modules/contentful-migration/built/bin/cli.js:189:29)
+    at async Task.run (/Applications/projects/daniel-one-four/node_modules/listr2/dist/lib/task.js:213:21)
+    at async /Applications/projects/daniel-one-four/node_modules/p-map/index.js:57:22BadRequest: {
+  "status": 400,
+  "statusText": "Bad Request",
+  "message": "The content type you sent could not be found or was not activated.",
+  "details": {},
+  "request": {
+    "url": "https://api.contentful.com/spaces/rqwpeakausv1/environments/master/content_types/teamMember/editor_interface",
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/vnd.contentful.management.v1+json",
+      "X-Contentful-User-Agent": "app contentful.migration-cli/4.28.1; feature migration-library; sdk contentful-management-plain.js/11.48.0; platform node.js/v20.18.1; os macOS/v20.18.1;",
+      "CF-Sequence": "f8a364ee-55b8-4c4a-b015-d3a5f08def29",
+      "Authorization": "Bearer ..._9ExY",
+      "X-Contentful-Version": "4",
+      "User-Agent": "axios/1.7.9",
+      "Content-Length": "376",
+      "Accept-Encoding": "gzip, compress, deflate, br"
+    },
+    "method": "put",
+    "payloadData": "{\"controls\":[{\"fieldId\":\"name\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"slug\",\"widgetId\":\"slugEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"role\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"photo\",\"widgetId\":\"assetLinkEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"bio\",\"widgetId\":\"multipleLine\",\"widgetNamespace\":\"builtin\"}]}"
+  },
+  "requestId": "b41279fa-4154-44b5-b251-ccd2dd3ba63a"
+}
+    at errorHandler (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:30884:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async makeRequest (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:4749:10)
+    at async Task.task (/Applications/projects/daniel-one-four/node_modules/contentful-migration/built/bin/cli.js:189:29)
+    at async Task.run (/Applications/projects/daniel-one-four/node_modules/listr2/dist/lib/task.js:213:21)
+    at async /Applications/projects/daniel-one-four/node_modules/p-map/index.js:57:22BadRequest: {
+  "status": 400,
+  "statusText": "Bad Request",
+  "message": "The content type you sent could not be found or was not activated.",
+  "details": {},
+  "request": {
+    "url": "https://api.contentful.com/spaces/rqwpeakausv1/environments/master/content_types/teamMember/editor_interface",
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/vnd.contentful.management.v1+json",
+      "X-Contentful-User-Agent": "app contentful.migration-cli/4.28.1; feature migration-library; sdk contentful-management-plain.js/11.48.0; platform node.js/v20.18.1; os macOS/v20.18.1;",
+      "CF-Sequence": "f8a364ee-55b8-4c4a-b015-d3a5f08def29",
+      "Authorization": "Bearer ..._9ExY",
+      "X-Contentful-Version": "5",
+      "User-Agent": "axios/1.7.9",
+      "Content-Length": "453",
+      "Accept-Encoding": "gzip, compress, deflate, br"
+    },
+    "method": "put",
+    "payloadData": "{\"controls\":[{\"fieldId\":\"name\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"slug\",\"widgetId\":\"slugEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"role\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"photo\",\"widgetId\":\"assetLinkEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"bio\",\"widgetId\":\"multipleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"shortBio\",\"widgetId\":\"multipleLine\",\"widgetNamespace\":\"builtin\"}]}"
+  },
+  "requestId": "6b654d30-ebc1-445c-92df-2a6ae852e591"
+}
+    at errorHandler (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:30884:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async makeRequest (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:4749:10)
+    at async Task.task (/Applications/projects/daniel-one-four/node_modules/contentful-migration/built/bin/cli.js:189:29)
+    at async Task.run (/Applications/projects/daniel-one-four/node_modules/listr2/dist/lib/task.js:213:21)
+    at async /Applications/projects/daniel-one-four/node_modules/p-map/index.js:57:22BadRequest: {
+  "status": 400,
+  "statusText": "Bad Request",
+  "message": "The content type you sent could not be found or was not activated.",
+  "details": {},
+  "request": {
+    "url": "https://api.contentful.com/spaces/rqwpeakausv1/environments/master/content_types/teamMember/editor_interface",
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/vnd.contentful.management.v1+json",
+      "X-Contentful-User-Agent": "app contentful.migration-cli/4.28.1; feature migration-library; sdk contentful-management-plain.js/11.48.0; platform node.js/v20.18.1; os macOS/v20.18.1;",
+      "CF-Sequence": "f8a364ee-55b8-4c4a-b015-d3a5f08def29",
+      "Authorization": "Bearer ..._9ExY",
+      "X-Contentful-Version": "6",
+      "User-Agent": "axios/1.7.9",
+      "Content-Length": "525",
+      "Accept-Encoding": "gzip, compress, deflate, br"
+    },
+    "method": "put",
+    "payloadData": "{\"controls\":[{\"fieldId\":\"name\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"slug\",\"widgetId\":\"slugEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"role\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"photo\",\"widgetId\":\"assetLinkEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"bio\",\"widgetId\":\"multipleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"shortBio\",\"widgetId\":\"multipleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"email\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"}]}"
+  },
+  "requestId": "84391add-a869-425c-827a-e2bcd3f17b80"
+}
+    at errorHandler (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:30884:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async makeRequest (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:4749:10)
+    at async Task.task (/Applications/projects/daniel-one-four/node_modules/contentful-migration/built/bin/cli.js:189:29)
+    at async Task.run (/Applications/projects/daniel-one-four/node_modules/listr2/dist/lib/task.js:213:21)
+    at async /Applications/projects/daniel-one-four/node_modules/p-map/index.js:57:22BadRequest: {
+  "status": 400,
+  "statusText": "Bad Request",
+  "message": "The content type you sent could not be found or was not activated.",
+  "details": {},
+  "request": {
+    "url": "https://api.contentful.com/spaces/rqwpeakausv1/environments/master/content_types/teamMember/editor_interface",
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/vnd.contentful.management.v1+json",
+      "X-Contentful-User-Agent": "app contentful.migration-cli/4.28.1; feature migration-library; sdk contentful-management-plain.js/11.48.0; platform node.js/v20.18.1; os macOS/v20.18.1;",
+      "CF-Sequence": "f8a364ee-55b8-4c4a-b015-d3a5f08def29",
+      "Authorization": "Bearer ..._9ExY",
+      "X-Contentful-Version": "7",
+      "User-Agent": "axios/1.7.9",
+      "Content-Length": "597",
+      "Accept-Encoding": "gzip, compress, deflate, br"
+    },
+    "method": "put",
+    "payloadData": "{\"controls\":[{\"fieldId\":\"name\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"slug\",\"widgetId\":\"slugEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"role\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"photo\",\"widgetId\":\"assetLinkEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"bio\",\"widgetId\":\"multipleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"shortBio\",\"widgetId\":\"multipleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"email\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"phone\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"}]}"
+  },
+  "requestId": "48b3483a-1461-40b7-af4b-1577c7a8d748"
+}
+    at errorHandler (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:30884:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async makeRequest (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:4749:10)
+    at async Task.task (/Applications/projects/daniel-one-four/node_modules/contentful-migration/built/bin/cli.js:189:29)
+    at async Task.run (/Applications/projects/daniel-one-four/node_modules/listr2/dist/lib/task.js:213:21)
+    at async /Applications/projects/daniel-one-four/node_modules/p-map/index.js:57:22BadRequest: {
+  "status": 400,
+  "statusText": "Bad Request",
+  "message": "The content type you sent could not be found or was not activated.",
+  "details": {},
+  "request": {
+    "url": "https://api.contentful.com/spaces/rqwpeakausv1/environments/master/content_types/teamMember/editor_interface",
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/vnd.contentful.management.v1+json",
+      "X-Contentful-User-Agent": "app contentful.migration-cli/4.28.1; feature migration-library; sdk contentful-management-plain.js/11.48.0; platform node.js/v20.18.1; os macOS/v20.18.1;",
+      "CF-Sequence": "f8a364ee-55b8-4c4a-b015-d3a5f08def29",
+      "Authorization": "Bearer ..._9ExY",
+      "X-Contentful-Version": "8",
+      "User-Agent": "axios/1.7.9",
+      "Content-Length": "674",
+      "Accept-Encoding": "gzip, compress, deflate, br"
+    },
+    "method": "put",
+    "payloadData": "{\"controls\":[{\"fieldId\":\"name\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"slug\",\"widgetId\":\"slugEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"role\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"photo\",\"widgetId\":\"assetLinkEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"bio\",\"widgetId\":\"multipleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"shortBio\",\"widgetId\":\"multipleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"email\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"phone\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"linkedinUrl\",\"widgetId\":\"urlEditor\",\"widgetNamespace\":\"builtin\"}]}"
+  },
+  "requestId": "3a682fbb-75fe-47bc-a738-34468a23a0c9"
+}
+    at errorHandler (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:30884:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async makeRequest (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:4749:10)
+    at async Task.task (/Applications/projects/daniel-one-four/node_modules/contentful-migration/built/bin/cli.js:189:29)
+    at async Task.run (/Applications/projects/daniel-one-four/node_modules/listr2/dist/lib/task.js:213:21)
+    at async /Applications/projects/daniel-one-four/node_modules/p-map/index.js:57:22BadRequest: {
+  "status": 400,
+  "statusText": "Bad Request",
+  "message": "The content type you sent could not be found or was not activated.",
+  "details": {},
+  "request": {
+    "url": "https://api.contentful.com/spaces/rqwpeakausv1/environments/master/content_types/teamMember/editor_interface",
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/vnd.contentful.management.v1+json",
+      "X-Contentful-User-Agent": "app contentful.migration-cli/4.28.1; feature migration-library; sdk contentful-management-plain.js/11.48.0; platform node.js/v20.18.1; os macOS/v20.18.1;",
+      "CF-Sequence": "f8a364ee-55b8-4c4a-b015-d3a5f08def29",
+      "Authorization": "Bearer ..._9ExY",
+      "X-Contentful-Version": "9",
+      "User-Agent": "axios/1.7.9",
+      "Content-Length": "750",
+      "Accept-Encoding": "gzip, compress, deflate, br"
+    },
+    "method": "put",
+    "payloadData": "{\"controls\":[{\"fieldId\":\"name\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"slug\",\"widgetId\":\"slugEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"role\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"photo\",\"widgetId\":\"assetLinkEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"bio\",\"widgetId\":\"multipleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"shortBio\",\"widgetId\":\"multipleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"email\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"phone\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"linkedinUrl\",\"widgetId\":\"urlEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"twitterUrl\",\"widgetId\":\"urlEditor\",\"widgetNamespace\":\"builtin\"}]}"
+  },
+  "requestId": "b75adede-e8ff-4b35-b092-7a4133aa1bba"
+}
+    at errorHandler (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:30884:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async makeRequest (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:4749:10)
+    at async Task.task (/Applications/projects/daniel-one-four/node_modules/contentful-migration/built/bin/cli.js:189:29)
+    at async Task.run (/Applications/projects/daniel-one-four/node_modules/listr2/dist/lib/task.js:213:21)
+    at async /Applications/projects/daniel-one-four/node_modules/p-map/index.js:57:22BadRequest: {
+  "status": 400,
+  "statusText": "Bad Request",
+  "message": "The content type you sent could not be found or was not activated.",
+  "details": {},
+  "request": {
+    "url": "https://api.contentful.com/spaces/rqwpeakausv1/environments/master/content_types/teamMember/editor_interface",
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/vnd.contentful.management.v1+json",
+      "X-Contentful-User-Agent": "app contentful.migration-cli/4.28.1; feature migration-library; sdk contentful-management-plain.js/11.48.0; platform node.js/v20.18.1; os macOS/v20.18.1;",
+      "CF-Sequence": "f8a364ee-55b8-4c4a-b015-d3a5f08def29",
+      "Authorization": "Bearer ..._9ExY",
+      "X-Contentful-Version": "10",
+      "User-Agent": "axios/1.7.9",
+      "Content-Length": "899",
+      "Accept-Encoding": "gzip, compress, deflate, br"
+    },
+    "method": "put",
+    "payloadData": "{\"controls\":[{\"fieldId\":\"name\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"slug\",\"widgetId\":\"slugEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"role\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"photo\",\"widgetId\":\"assetLinkEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"bio\",\"widgetId\":\"multipleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"shortBio\",\"widgetId\":\"multipleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"email\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"phone\",\"widgetId\":\"singleLine\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"linkedinUrl\",\"widgetId\":\"urlEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"twitterUrl\",\"widgetId\":\"urlEditor\",\"widgetNamespace\":\"builtin\"},{\"fieldId\":\"featured\",\"widgetId\":\"boolean\",\"settings\":{\"helpText\":\"Toggle to feature this team member on the homepage\"},\"widgetNamespace\":\"builtin\"}]}"
+  },
+  "requestId": "ec695539-9f3a-4235-92e8-600e390a9a68"
+}
+    at errorHandler (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:30884:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async makeRequest (/Applications/projects/daniel-one-four/node_modules/contentful-management/dist/contentful-management.node.js:4749:10)
+    at async Task.task (/Applications/projects/daniel-one-four/node_modules/contentful-migration/built/bin/cli.js:189:29)
+    at async Task.run (/Applications/projects/daniel-one-four/node_modules/listr2/dist/lib/task.js:213:21)
+    at async /Applications/projects/daniel-one-four/node_modules/p-map/index.js:57:22

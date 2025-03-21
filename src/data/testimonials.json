@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Sarah Johnson",
+    "quote": "Working with Daniel One Four completely transformed my approach to leadership. The personalized coaching helped me identify blind spots I never knew I had and develop strategies that significantly improved my team's performance and morale.",
+    "role": "CEO",
+    "company": "TechVision Inc.",
+    "image": "/placeholder-testimonial-1.jpg",
+    "featured": true,
+    "order": 1
+  },
+  {
+    "name": "Michael Chen",
+    "quote": "The team coaching program at Daniel One Four created a remarkable shift in our executive team dynamics. We're now communicating more effectively, making better decisions, and working together more cohesively than ever before. The ROI on this investment has been extraordinary.",
+    "role": "Director of Operations",
+    "company": "Global Solutions",
+    "image": "/placeholder-testimonial-2.jpg",
+    "featured": true,
+    "order": 2
+  },
+  {
+    "name": "Jennifer Williams",
+    "quote": "After participating in the mindfulness training program, I've experienced a significant reduction in stress and improved focus. The techniques I learned have helped me manage challenging situations with more clarity and composure.",
+    "role": "Senior Project Manager",
+    "company": "Innovative Designs",
+    "featured": false,
+    "order": 3
+  },
+  {
+    "name": "Robert Thompson",
+    "quote": "The career transition coaching I received was invaluable. My coach helped me identify my transferable skills, refine my personal brand, and navigate a complex job market with confidence. I secured a role that's a much better fit for my skills and aspirations.",
+    "role": "Finance Director",
+    "company": "Apex Investments",
+    "image": "/placeholder-coach-2.jpg",
+    "featured": false,
+    "order": 4
+  },
+  {
+    "name": "Emma Rodriguez",
+    "quote": "The leadership development program was exactly what I needed to take my management skills to the next level. The combination of group workshops and individual coaching provided both peer learning and personalized guidance.",
+    "role": "Team Lead",
+    "company": "Creative Solutions",
+    "image": "/placeholder-coach-3.jpg",
+    "featured": true,
+    "order": 5
+  }
+] 
