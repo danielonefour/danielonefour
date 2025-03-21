@@ -29,16 +29,24 @@ interface Event {
 
 interface ClientEventPageProps {
   slug: string;
+  initialEvent?: Event;
 }
 
-export default function ClientEventPage({ slug }: ClientEventPageProps) {
-  const [event, setEvent] = useState<Event | null>(null);
+export default function ClientEventPage({ slug, initialEvent }: ClientEventPageProps) {
+  const [event, setEvent] = useState<Event | null>(initialEvent || null);
   const [contentHtml, setContentHtml] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(!initialEvent);
   const [error, setError] = useState<string | null>(null);
   
   useEffect(() => {
     const fetchEventData = async () => {
+      // Skip fetching if we already have the event data
+      if (initialEvent) {
+        // Still need to process content if we have initialEvent
+        processContent(initialEvent.content);
+        return;
+      }
+      
       try {
         setIsLoading(true);
         setError(null);
@@ -49,15 +57,11 @@ export default function ClientEventPage({ slug }: ClientEventPageProps) {
           notFound();
         }
         
-        setEvent(eventData as Event);
+        setEvent(eventData);
         
-        // Process content with remark-html if it's a string
-        if (eventData.content && typeof eventData.content === 'string') {
-          const processedContent = await remark()
-            .use(html)
-            .process(eventData.content);
-          
-          setContentHtml(processedContent.toString());
+        // Process the Markdown content
+        if (eventData.content) {
+          processContent(eventData.content);
         }
       } catch (err) {
         console.error('Error fetching event data:', err);
@@ -67,10 +71,23 @@ export default function ClientEventPage({ slug }: ClientEventPageProps) {
       }
     };
     
-    if (slug) {
-      fetchEventData();
+    fetchEventData();
+  }, [slug, initialEvent]);
+  
+  // Separate function to process content
+  const processContent = async (content: string) => {
+    if (!content) return;
+    
+    try {
+      const processedContent = await remark()
+        .use(html)
+        .process(content);
+      
+      setContentHtml(processedContent.toString());
+    } catch (err) {
+      console.error('Error processing markdown content:', err);
     }
-  }, [slug]);
+  };
 
   // Loading state
   if (isLoading) {

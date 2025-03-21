@@ -5,6 +5,7 @@ import Link from 'next/link';
 import PageHeader from '@/components/layout/PageHeader';
 import { getProgramBySlug, getAllPrograms } from '@/lib/contentful-programs';
 import Header from '@/components/layout/Header';
+import { getCompanyDetailsCached } from '@/lib/contentful-company-details';
 
 // Import a placeholder image for the page header
 import headerImage from '@/assets/images/about.png';
@@ -45,6 +46,7 @@ export async function generateStaticParams() {
 export default async function ProgramPage({ params }: Props) {
   const id = params.id;
   const program = await getProgramBySlug(id);
+  const companyDetails = await getCompanyDetailsCached();
   
   if (!program) {
     notFound();
@@ -174,13 +176,13 @@ export default async function ProgramPage({ params }: Props) {
                   Our team is here to help you choose the right program for your needs.
                 </p>
                 <a 
-                  href="tel:+11234567890" 
+                  href={`tel:${companyDetails?.primaryPhoneNumber || '+11234567890'}`} 
                   className="flex items-center text-brand-blue font-medium"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  (123) 456-7890
+                  {companyDetails?.primaryPhoneNumber || '(123) 456-7890'}
                 </a>
               </div>
             </div>

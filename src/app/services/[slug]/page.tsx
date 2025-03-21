@@ -13,6 +13,27 @@ import ServiceFAQs from '@/components/services/ServiceFAQs';
 import { getServiceBySlug, getAllServices } from '@/lib/contentful';
 import ClientServicePage from '@/components/services/ClientServicePage';
 
+// Define revalidation period for ISR
+export const revalidate = 3600; // Revalidate every hour
+
+// Enable dynamic params for routes not generated at build time
+export const dynamicParams = true;
+
+// Generate static params for all services at build time
+export async function generateStaticParams() {
+  try {
+    const services = await getAllServices();
+    console.log(`Generating static params for ${services.length} services`);
+    
+    return services.map((service) => ({
+      slug: service.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params for services:', error);
+    return [];
+  }
+}
+
 interface ServicePageProps {
   params: {
     slug: string;
@@ -33,6 +54,12 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
   return {
     title: `${service.title} | Daniel One Four Coaching`,
     description: service.description,
+    openGraph: {
+      title: service.title,
+      description: service.description,
+      images: service.featuredImage ? [service.featuredImage] : [],
+      type: 'website',
+    },
   };
 }
 

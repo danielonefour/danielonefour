@@ -7,6 +7,8 @@ import coachingImage from '@/assets/images/coaching.png';
 import { useAllServices } from '@/hooks/use-contentful';
 import { Oval } from 'react-loader-spinner';
 import { Service } from '@/lib/contentful';
+import Link from 'next/link';
+import { FiAlertTriangle } from 'react-icons/fi';
 
 interface ServicesProps {
   initialServices?: Service[];
@@ -17,7 +19,7 @@ const CoachingExperienceSection = ({ initialServices }: ServicesProps) => {
   const [activeExperience, setActiveExperience] = useState(0);
   
   // Fetch services from Contentful - use initialServices as fallback data
-  const { data: servicesData = [], isLoading, error } = useAllServices({
+  const { data: servicesData = [], isLoading, error, refetch } = useAllServices({
     initialData: initialServices,
     enabled: !initialServices // Only fetch if we don't have initial data
   });
@@ -58,36 +60,41 @@ const CoachingExperienceSection = ({ initialServices }: ServicesProps) => {
     );
   }
 
-  // If there's an error loading the services, display some fallback
+  // If there's an error loading the services, display error message
   if ((error || services.length === 0) && !initialServices) {
-    // Keep the original static data as fallback
-    const fallbackExperiences = [
-      {
-        title: 'Personal Development Coaching',
-        subtitle: 'Coaching',
-        description: 'Duis Vel Tincidunt Est. Proin Eget Nisl Sit Amet Magna Efficitur Rutrum Sit Amet At Urna. Sed Cursus, Ligula Eget Ultrices Tristique, Nibh Augue Molestie Nulla, Ut Auctor Felis Neque Sed Tellus. Ut In Metus Mi. Vivamus Quis Sapien Fringilla, Sagittis Est Fermentum, Volutpat Metus. Mauris Efficitur Tincidunt Leo A Tincidunt.',
-        link: '/services/personal-development',
-      },
-      {
-        title: 'Executive Coaching',
-        subtitle: 'Executive Coaching',
-        description: 'Duis Vel Tincidunt Est. Proin Eget Nisl Sit Amet Magna Efficitur Rutrum Sit Amet At Urna. Sed Cursus, Ligula Eget Ultrices Tristique, Nibh Augue Molestie Nulla, Ut Auctor Felis Neque Sed Tellus. Ut In Metus Mi. Vivamus Quis Sapien Fringilla, Sagittis Est Fermentum, Volutpat Metus. Mauris Efficitur Tincidunt Leo A Tincidunt.',
-        link: '/services/executive-coaching',
-      },
-      {
-        title: 'Coaching Businessmen Since Day One',
-        subtitle: 'Business Coaching',
-        description: 'Duis Vel Tincidunt Est. Proin Eget Nisl Sit Amet Magna Efficitur Rutrum Sit Amet At Urna. Sed Cursus, Ligula Eget Ultrices Tristique, Nibh Augue Molestie Nulla, Ut Auctor Felis Neque Sed Tellus. Ut In Metus Mi. Vivamus Quis Sapien Fringilla, Sagittis Est Fermentum, Volutpat Metus. Mauris Efficitur Tincidunt Leo A Tincidunt.',
-        link: '/services/business-coaching',
-      },
-      {
-        title: 'The Custom Clarity Coaching',
-        subtitle: 'Clarity Coaching',
-        description: 'Duis Vel Tincidunt Est. Proin Eget Nisl Sit Amet Magna Efficitur Rutrum Sit Amet At Urna. Sed Cursus, Ligula Eget Ultrices Tristique, Nibh Augue Molestie Nulla, Ut Auctor Felis Neque Sed Tellus. Ut In Metus Mi. Vivamus Quis Sapien Fringilla, Sagittis Est Fermentum, Volutpat Metus. Mauris Efficitur Tincidunt Leo A Tincidunt.',
-        link: '/services/clarity-coaching',
-      },
-    ];
-    return renderContent(fallbackExperiences);
+    return (
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="uppercase tracking-wider text-sm font-medium mb-4">
+              SERVICES
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold">
+              Offer Exceptional Coaching Experiences
+            </h2>
+          </div>
+          <div className="flex flex-col items-center justify-center py-20">
+            <FiAlertTriangle className="text-red-500 mb-4" size={48} />
+            <h3 className="text-xl font-bold mb-2">Unable to load services</h3>
+            <p className="text-gray-600 mb-6 text-center max-w-md">
+              {error ? 'There was an error loading our services.' : 'No services are currently available.'}
+            </p>
+            <button 
+              onClick={() => refetch()}
+              className="bg-brand-blue text-white px-6 py-2 rounded hover:bg-opacity-90 transition-colors"
+            >
+              Try Again
+            </button>
+            <Link 
+              href="/services"
+              className="mt-4 text-brand-blue hover:underline"
+            >
+              View All Services
+            </Link>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   // Map Contentful services to the format expected by the UI
@@ -150,7 +157,7 @@ const CoachingExperienceSection = ({ initialServices }: ServicesProps) => {
               
               <HoleButton 
                 href={experiencesData[activeExperience]?.link}
-                bgColorClass="bg-white"
+                bgColorClass="bg-brand-orange"
               >
                 <span className="mr-4">Discover More</span>
               </HoleButton>

@@ -1,9 +1,31 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { getEventBySlug } from '@/lib/contentful-events';
+import { getEventBySlug, getAllEvents } from '@/lib/contentful-events';
 import ClientEventPage from '@/components/events/ClientEventPage';
+import { Metadata } from 'next';
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+// Define revalidation period for ISR
+export const revalidate = 3600; // Revalidate every hour
+
+// Enable dynamic params for routes not generated at build time
+export const dynamicParams = true;
+
+// Generate static params for all events at build time
+export async function generateStaticParams() {
+  try {
+    const events = await getAllEvents();
+    console.log(`Generating static params for ${events?.items?.length} events`);
+    
+    return events?.items?.map((event) => ({
+      slug: event.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params for events:', error);
+    return [];
+  }
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const slug = params.slug;
   const event = await getEventBySlug(slug);
   
@@ -17,9 +39,22 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: `${event.title} - Daniel One Four Events`,
     description: event.description,
+    openGraph: {
+      title: event.title,
+      description: event.description,
+      images: event.image ? [event.image] : [],
+      type: 'website',
+    },
   };
 }
 
-export default function EventPage({ params }: { params: { slug: string } }) {
-  return <ClientEventPage slug={params.slug} />;
+export default async function EventPage({ params }: { params: { slug: string } }) {
+  // Pre-fetch the event data on the server for SEO
+  const event = await getEventBySlug(params.slug);
+  
+  if (!event) {
+    notFound();
+  }
+  
+  return <ClientEventPage slug={params.slug} initialEvent={event} />;
 } 

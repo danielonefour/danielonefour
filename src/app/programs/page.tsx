@@ -82,7 +82,7 @@ export default async function ProgramsPage() {
                         <div className="mt-auto">
                           <HoleButton 
                             href={`programs/${program.slug}`}
-                            bgColorClass="bg-white"
+                            bgColorClass="bg-brand-orange"
                           >
                             <span className="mr-4">More Details</span>
                           </HoleButton>
@@ -121,7 +121,7 @@ export default async function ProgramsPage() {
                         <div className="mt-auto">
                           <HoleButton 
                             href={`programs/${program.slug}`}
-                            bgColorClass="bg-white"
+                            bgColorClass="bg-brand-orange"
                           >
                             <span className="mr-4">More Details</span>
                           </HoleButton>

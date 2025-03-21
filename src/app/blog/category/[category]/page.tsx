@@ -97,4 +97,23 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
     console.error('Error in CategoryPage:', error);
     return notFound();
   }
+}
+
+export const revalidate = 3600; // Revalidate every hour
+
+export const dynamicParams = true;
+
+// Generate static params for all categories at build time
+export async function generateStaticParams() {
+  try {
+    const categories = await getBlogCategories();
+    console.log(`Generating static params for ${categories.length} blog categories`);
+    
+    return categories.map((category) => ({
+      category: category.name.toLowerCase().replace(/\s+/g, '-'),
+    }));
+  } catch (error) {
+    console.error('Error generating static params for blog categories:', error);
+    return [];
+  }
 } 
