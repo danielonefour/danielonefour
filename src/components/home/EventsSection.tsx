@@ -9,12 +9,18 @@ import eventImage from '@/assets/images/event.png';
 import { format } from 'date-fns';
 import { getUpcomingEvents, Event } from '@/lib/contentful-events';
 
-const EventsSection = () => {
-  const [events, setEvents] = useState<Event[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+interface EventsSectionProps {
+  initialEvents?: Event[];
+}
+
+const EventsSection = ({ initialEvents }: EventsSectionProps) => {
+  const [events, setEvents] = useState<Event[]>(initialEvents || []);
+  const [isLoading, setIsLoading] = useState(!initialEvents);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // Only fetch events if we don't have initialEvents
+    if (!initialEvents) {
       const fetchEvents = async () => {
         try {
           setIsLoading(true);
@@ -30,49 +36,56 @@ const EventsSection = () => {
       };
   
       fetchEvents();
-    }, []);
+    }
+  }, [initialEvents]);
 
-    if (isLoading) {
-        return (
-          <section className="py-16 bg-white">
-            <div className="container mx-auto px-4">
-              <div className="flex justify-between items-center mb-8">
-                <h2 className="text-3xl md:text-4xl font-bold">Upcoming Events</h2>
-                <Link href="/events" className="text-blue-600 hover:text-blue-800 font-medium flex items-center">
-                  View All Events
-                </Link>
+  if (isLoading) {
+    return (
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold">Upcoming Events</h2>
+            <Link href="/events" className="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+              View All
+            </Link>
+          </div>
+          <div className="flex items-center justify-center py-16">
+            <div className="animate-pulse flex space-x-4">
+              <div className="flex-1 space-y-6 py-1">
+                <div className="h-40 bg-gray-200 rounded"></div>
+                <div className="space-y-3">
+                  <div className="h-6 bg-gray-200 rounded"></div>
+                  <div className="h-6 bg-gray-200 rounded w-5/6"></div>
+                </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {[...Array(3)].map((_, i) => (
-                  <div key={i} className="bg-gray-100 p-4 rounded-lg h-96 animate-pulse"></div>
-                ))}
-              </div>
             </div>
-          </section>
-        );
-      }
-    
-      if (error) {
-        return (
-          <section className="py-16 bg-white">
-            <div className="container mx-auto px-4">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Upcoming Events</h2>
-              <p className="text-center text-red-500 mb-8">{error}</p>
-            </div>
-          </section>
-        );
-      }
-    
-      if (events.length === 0) {
-        return (
-          <section className="py-16 bg-white">
-            <div className="container mx-auto px-4">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Upcoming Events</h2>
-              <p className="text-center text-gray-500 mb-8">No upcoming events at the moment. Check back soon!</p>
-            </div>
-          </section>
-        );
-      }
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Upcoming Events</h2>
+          <p className="text-center text-red-500 mb-8">{error}</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (events.length === 0) {
+    return (
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Upcoming Events</h2>
+          <p className="text-center text-gray-500 mb-8">No upcoming events at the moment. Check back soon!</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-16 md:py-24 bg-light-gray">

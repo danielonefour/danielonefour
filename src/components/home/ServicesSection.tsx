@@ -6,21 +6,32 @@ import HoleButton from '@/components/ui/HoleButton';
 import coachingImage from '@/assets/images/coaching.png';
 import { useAllServices } from '@/hooks/use-contentful';
 import { Oval } from 'react-loader-spinner';
+import { Service } from '@/lib/contentful';
 
-const CoachingExperienceSection = () => {
+interface ServicesProps {
+  initialServices?: Service[];
+}
+
+const CoachingExperienceSection = ({ initialServices }: ServicesProps) => {
   // State to track the active experience
   const [activeExperience, setActiveExperience] = useState(0);
   
-  // Fetch services from Contentful
-  const { data: services = [], isLoading, error } = useAllServices();
+  // Fetch services from Contentful - use initialServices as fallback data
+  const { data: servicesData = [], isLoading, error } = useAllServices({
+    initialData: initialServices,
+    enabled: !initialServices // Only fetch if we don't have initial data
+  });
+  
+  // Use either the fetched data or the initial data
+  const services = servicesData || initialServices || [];
 
   // Function to format the count number with leading zero
   const formatCount = (index: number): string => {
     return `${index + 1}`.padStart(2, '0');
   };
 
-  // Show loading state while fetching data
-  if (isLoading) {
+  // Show loading state while fetching data and no initial data
+  if (isLoading && !initialServices) {
     return (
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-6">
@@ -48,7 +59,7 @@ const CoachingExperienceSection = () => {
   }
 
   // If there's an error loading the services, display some fallback
-  if (error || services.length === 0) {
+  if ((error || services.length === 0) && !initialServices) {
     // Keep the original static data as fallback
     const fallbackExperiences = [
       {

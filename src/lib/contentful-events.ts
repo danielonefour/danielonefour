@@ -89,12 +89,20 @@ export async function getUpcomingEvents(count: number = 3): Promise<Event[]> {
   try {
     const response = await client.getEntries({
       content_type: 'event',
+      // Order by date ascending to get the closest upcoming events first
       order: 'fields.date',
-      limit: count,
+      limit: count * 2, // Fetch more than needed to ensure we have enough after filtering
       'fields.date[gte]': now,
     });
     
-    return mapContentfulEvents(response);
+    // Map the events and then sort them by date (closest first)
+    const events = mapContentfulEvents(response);
+    
+    // Sort events by date in ascending order (closest first)
+    events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    
+    // Return only the requested number of events
+    return events.slice(0, count);
   } catch (error) {
     console.error('Error fetching upcoming events from Contentful:', error);
     return [];

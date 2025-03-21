@@ -46,10 +46,15 @@ export function useBlogPostsByCategory(category: string, page: number = 1, perPa
   });
 }
 
-export function useFeaturedBlogPosts(page: number = 1, perPage: number = 9) {
+export function useFeaturedBlogPosts(page: number = 1, perPage: number = 9, options?: { 
+  initialData?: PaginatedResponse<BlogPost>,
+  enabled?: boolean 
+}) {
   return useQuery<PaginatedResponse<BlogPost>, Error>({
     queryKey: ['blogPosts', 'featured', page, perPage],
     queryFn: () => getFeaturedBlogPosts(page, perPage),
+    initialData: options?.initialData,
+    enabled: options?.enabled !== false // Default to true if not specified
   });
 }
 
@@ -84,10 +89,15 @@ export function useFeaturedTeamMembers() {
 }
 
 // Service queries
-export function useAllServices() {
+export function useAllServices(options?: { 
+  initialData?: Service[],
+  enabled?: boolean 
+}) {
   return useQuery<Service[], Error>({
     queryKey: ['services'],
     queryFn: () => getAllServices(),
+    initialData: options?.initialData,
+    enabled: options?.enabled !== false // Default to true if not specified
   });
 }
 

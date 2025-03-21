@@ -432,48 +432,48 @@ export async function getFeaturedBlogPosts(page = 1, perPage = 9): Promise<Pagin
 /**
  * Fetches blog posts by category
  */
-export async function getBlogPostsByCategory(category: string, page = 1, perPage = 9): Promise<PaginatedResponse<BlogPost>> {
-  console.log('category in ...', category)
+export async function getBlogPostsByCategory(categorySlug: string, page = 1, perPage = 9): Promise<PaginatedResponse<BlogPost>> {
   try {
     const skip = (page - 1) * perPage;
     
-    // Debug the category value
-    console.log('Original category parameter:', category);
+    // Convert the slug format to the actual category name format
+    // Example: "leadership-development" -> "Leadership Development"
+    const categoryName = categorySlug
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
     
-    // Use the Contentful search query for more flexibility (doesn't use exact matching)
-    const response = await fetch(
-      `https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/${process.env.CONTENTFUL_ENVIRONMENT || 'master'}/entries?content_type=blogPost&query=fields.category:${category}&order=-fields.date&skip=${skip}&limit=${perPage}`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-        },
-        next: { revalidate: 60 },
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`Contentful API error: ${response.status}`);
-    }
-
-    // Log the raw response for debugging
-    const data = await response.json();
-    console.log('data', data)
-    console.log('Contentful category query response:', {
-      total: data.total,
-      items: data.items ? data.items.length : 0
+    console.log('Fetching blog posts for category:', categorySlug);
+    console.log('Using category name format:', categoryName);
+    
+    // Use content type filtering with fields.category using the properly formatted category name
+    const response = await client.getEntries({
+      content_type: 'blogPost',
+      'fields.category': categoryName, // Use the converted category name
+      order: '-fields.date',
+      skip: skip,
+      limit: perPage,
     });
     
-    const blogPosts = mapContentfulBlogPosts(data);
-
+    // Log response for debugging
+    console.log(`Found ${response.total} posts for category "${categoryName}"`);
+    
+    const blogPosts = mapContentfulBlogPosts(response);
+    
     return {
       items: blogPosts,
-      total: data.total,
-      skip: data.skip,
-      limit: data.limit
+      total: response.total,
+      skip: response.skip,
+      limit: response.limit,
     };
   } catch (error) {
-    console.error(`Error fetching blog posts for category ${category}:`, error);
-    throw new Error(`Failed to fetch blog posts for category ${category}`);
+    console.error('Error fetching blog posts by category:', error);
+    return {
+      items: [],
+      total: 0,
+      skip: (page - 1) * perPage,
+      limit: perPage,
+    };
   }
 }
 

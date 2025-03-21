@@ -203,18 +203,28 @@ export default function TagPage() {
       setIsLoading(true);
       setError(null);
       
+      console.log('Fetching posts for tag:', tagName);
+      
       // Fetch all blog posts and categories concurrently
-      const [allPosts, allCategories] = await Promise.all([
-        getAllBlogPosts(),
+      const [allPostsResponse, allCategories] = await Promise.all([
+        getAllBlogPosts(1, 100), // Get more posts to ensure we have enough after filtering
         getBlogCategories()
       ]);
       
-      // Filter posts by tag
+      // Ensure we have the items property from the response
+      const allPosts = allPostsResponse.items || [];
+      
+      console.log(`Fetched ${allPosts.length} total posts, filtering for tag: ${tagName}`);
+      
+      // Filter posts by tag - case insensitive tag comparison
       const filteredPosts = allPosts.filter(post => 
-        post.tags.some(tag => 
-          tag.toLowerCase() === tagName.toLowerCase()
+        Array.isArray(post.tags) && post.tags.some(tag => 
+          tag.toLowerCase().includes(tagName.toLowerCase()) ||
+          tagName.toLowerCase().includes(tag.toLowerCase())
         )
       );
+      
+      console.log(`Found ${filteredPosts.length} posts with tag: ${tagName}`);
       
       setPosts(filteredPosts);
       setCategories(allCategories);
