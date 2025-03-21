@@ -18,7 +18,7 @@ const LogoWithFallback: React.FC<LogoWithFallbackProps> = ({
   const [imageError, setImageError] = useState(false);
 
   return (
-    <div className={`relative h-10 w-28 ${className}`}>
+    <div className={`relative h-12 w-32 ${className}`}>
       {!imageError ? (
         <Image
           src={logoBlack}
@@ -30,7 +30,7 @@ const LogoWithFallback: React.FC<LogoWithFallbackProps> = ({
         />
       ) : (
         <div className="flex items-center justify-start h-full">
-          <span className="text-xl font-bold text-black">Dasan</span>
+          <span className="text-xl font-bold text-black">Daniel One Four</span>
         </div>
       )}
     </div>

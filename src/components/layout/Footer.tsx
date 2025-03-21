@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa';
 import { FiArrowRight, FiLoader, FiCheck, FiX } from 'react-icons/fi';
-import logoBlack from '@/assets/images/logo-black.png';
+import logoFooter from '@/assets/images/logo-footer.png';
 import { useCompanyDetails } from '@/hooks/useCompanyDetails';
 
 const Footer = () => {
@@ -78,11 +78,10 @@ const Footer = () => {
             <div className="flex items-center mb-6">
               <Link href="/" prefetch>
               <Image 
-                src={logoBlack} 
-                alt="Dasan" 
-                width={120} 
-                height={40} 
-                className="h-10 w-auto"
+                src={logoFooter} 
+                alt="Daniel One Four" 
+                height={80} 
+                className="h-20 w-auto"
               />
               </Link>
               
