@@ -264,7 +264,7 @@ const ClientContactPage = () => {
                     <div className="text-center p-8">
                       <FiMapPin className="text-5xl mb-4 mx-auto" />
                       <h3 className="text-xl font-bold mb-2">Our Location</h3>
-                      <p>Interactive map would be displayed here</p>
+                      <p>Interactive map will show here</p>
                     </div>
                   </div>
                 </div>
