@@ -20,6 +20,10 @@ const ProgramsSection = dynamic(() => import('@/components/home/ProgramsSection'
   loading: () => <LoadingSpinner />
 });
 
+const ClientsSection = dynamic(() => import('@/components/home/ClientsSection'), {
+  loading: () => <LoadingSpinner />
+});
+
 const ServicesSection = dynamic(() => import('@/components/home/ServicesSection'), {
   loading: () => <LoadingSpinner />
 });
@@ -57,6 +61,7 @@ export default async function Home() {
     <Header />
     <main>
       <HeroSection />
+      <ClientsSection />
       <ProgramsSection />
       <ServicesSection initialServices={initialServices} />
       <TestimonialsSection />
