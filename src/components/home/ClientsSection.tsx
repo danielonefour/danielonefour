@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import HoleButton from '@/components/ui/HoleButton';
-import aboutImage from '@/assets/images/about.png';
+import aboutImage from '@/assets/images/about.jpg';
 import { getFeaturedClients, Client } from '@/lib/contentful-clients';
 import { getAllResults, Result } from '@/lib/contentful-results';
 import { useCompanyDetails } from '@/hooks/useCompanyDetails';
@@ -220,28 +220,6 @@ const ClientsSection = () => {
                 </h3>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      
-      {/* Trusted By Companies - full width with light gray background */}
-      <div className="bg-light-gray">
-        <div className="container mx-auto px-6 mb-8">
-          <h3 className="text-xl font-medium mb-8">Trusted By Organizations</h3>
-        </div>
-        
-        <div className="w-full border-t border-gray-200">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
-            {clients.map((client, index) => (
-              <div 
-                key={index} 
-                className={`flex justify-center items-center py-8 px-4 ${
-                  index < clients.length - 1 ? 'border-r border-gray-200' : ''
-                }`}
-              >
-                <div className="text-xl font-bold text-gray-800">{client.name}</div>
-              </div>
-            ))}
           </div>
         </div>
       </div>

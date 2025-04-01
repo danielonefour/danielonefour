@@ -42,7 +42,7 @@ const CoachingExperienceSection = ({ initialServices }: ServicesProps) => {
               SERVICES
             </div>
             <h2 className="text-4xl md:text-5xl font-bold">
-              Offer Exceptional Coaching Experiences
+              We Offer Exceptional Training Experiences
             </h2>
           </div>
           <div className="flex justify-center items-center py-20">
