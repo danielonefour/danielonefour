@@ -16,9 +16,6 @@ const LoadingSpinner = () => (
 );
 
 // Dynamic imports with loading fallbacks
-const ProgramsSection = dynamic(() => import('@/components/home/ProgramsSection'), {
-  loading: () => <LoadingSpinner />
-});
 
 const ClientsSection = dynamic(() => import('@/components/home/ClientsSection'), {
   loading: () => <LoadingSpinner />
@@ -62,7 +59,6 @@ export default async function Home() {
     <main>
       <HeroSection />
       <ClientsSection />
-      <ProgramsSection />
       <ServicesSection initialServices={initialServices} />
       <TestimonialsSection />
       <EventsSection initialEvents={initialEvents} />

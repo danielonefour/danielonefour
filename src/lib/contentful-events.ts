@@ -38,6 +38,8 @@ function mapContentfulEvents(entries: any): Event[] {
     const imageUrl = fields.image?.fields?.file?.url 
       ? `https:${fields.image.fields.file.url}` 
       : undefined;
+
+      console.log('imageUrl...', imageUrl)
     
     return {
       id: item.sys.id,
@@ -92,7 +94,7 @@ export async function getUpcomingEvents(count: number = 3): Promise<Event[]> {
       // Order by date ascending to get the closest upcoming events first
       order: 'fields.date',
       limit: count * 2, // Fetch more than needed to ensure we have enough after filtering
-      'fields.date[gte]': now,
+      'fields.endDate[gte]': now,
     });
     
     // Map the events and then sort them by date (closest first)

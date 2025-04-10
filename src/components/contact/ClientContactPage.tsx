@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import PageHeader from '@/components/layout/PageHeader';
-import { FiMail, FiPhone, FiMapPin, FiSend, FiLoader, FiCheckCircle } from 'react-icons/fi';
+import { FiMail, FiPhone, FiSend, FiLoader, FiCheckCircle } from 'react-icons/fi';
 import aboutImage from '@/assets/images/about.png';
 import { useCompanyDetails } from '@/hooks/useCompanyDetails';
 
@@ -112,7 +112,7 @@ const ClientContactPage = () => {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
               {/* Contact Cards */}
               <div className="bg-header-bg p-8 rounded-md text-center">
                 <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
@@ -131,20 +131,11 @@ const ClientContactPage = () => {
                 <p className="mb-2">{companyDetails?.primaryEmail}</p>
                 <p>{companyDetails?.secondaryEmails?.map(email => email).join(', ')}</p>
               </div>
-              
-              <div className="bg-header-bg p-8 rounded-md text-center">
-                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
-                  <FiMapPin className="text-white text-2xl" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">Address</h3>
-                <p className="mb-2">{companyDetails?.streetAddress}</p>
-                <p>{companyDetails?.postCode}, {companyDetails?.country}</p>
-              </div>
             </div>
             
             {/* Contact Form */}
             <div className="bg-white shadow-md rounded-md overflow-hidden">
-              <div className="grid grid-cols-1 lg:grid-cols-2">
+              <div className="grid grid-cols-1">
                 <div className="p-8 md:p-12 bg-header-bg" id="contact-form">
                   <h3 className="text-2xl font-bold mb-6">Send Us a Message</h3>
                   <p className="mb-6">
@@ -256,17 +247,6 @@ const ClientContactPage = () => {
                       )}
                     </button>
                   </form>
-                </div>
-                
-                <div className="h-[600px] bg-gray-200">
-                  {/* Map placeholder - would be replaced with an actual map in production */}
-                  <div className="w-full h-full flex items-center justify-center bg-gray-300">
-                    <div className="text-center p-8">
-                      <FiMapPin className="text-5xl mb-4 mx-auto" />
-                      <h3 className="text-xl font-bold mb-2">Our Location</h3>
-                      <p>Interactive map will show here</p>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

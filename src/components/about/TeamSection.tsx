@@ -171,7 +171,7 @@ const TeamSection = () => {
               <FiChevronLeft size={24} className="text-gray-400" />
             </button>
             
-            <h2 className="text-4xl md:text-5xl font-bold px-6">Our Expert Team</h2>
+            <h2 className="text-4xl md:text-5xl font-bold px-6">About our CEO</h2>
             
             <button 
               onClick={selectedMember ? handleNext : undefined} 
@@ -184,9 +184,9 @@ const TeamSection = () => {
             </button>
           </div>
           
-          <p className="text-gray-700 max-w-3xl mx-auto">
+          {/* <p className="text-gray-700 max-w-3xl mx-auto">
             Our team of experienced coaches brings diverse expertise and a shared commitment to helping our clients achieve extraordinary results.
-          </p>
+          </p> */}
         </div>
 
         {/* Loading State */}
@@ -217,7 +217,7 @@ const TeamSection = () => {
         {!isLoading && teamMembers.length > 0 && (
           <>
             {selectedMember === null ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 gap-6">
                 {teamMembers.map((member, index) => (
                   <div 
                     key={member.id} 

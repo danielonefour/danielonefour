@@ -187,7 +187,7 @@ const TestimonialsSection = () => {
                     src={testimonial.image}
                     alt={testimonial.name}
                     fill
-                    style={{ objectFit: 'cover' }}
+                    style={{ objectFit: 'contain' }}
                   />
                 ) : (
                   <div className="w-full h-full bg-gray-200 flex items-center justify-center">

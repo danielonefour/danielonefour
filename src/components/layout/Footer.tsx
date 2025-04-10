@@ -89,21 +89,16 @@ const Footer = () => {
             <p className="text-gray-700 mb-6">
               {companyDetails?.introTagLine}
             </p>
-            <p className="text-gray-700 mb-6">
-              {companyDetails?.streetAddress}, {" "}
-              {companyDetails?.postCode}, {" "}
-              {companyDetails?.country}
-            </p>
             <div className="flex items-center text-gray-700">
               <span>
-                {companyDetails?.primaryPhoneNumber ? (
-                  <a href={`tel:${companyDetails?.primaryPhoneNumber}`}>{companyDetails?.primaryPhoneNumber}</a>
+                {companyDetails?.primaryEmail ? (
+                  <a href={`mailto:${companyDetails?.primaryEmail}`}>{companyDetails?.primaryEmail}</a>
                 ) : null}
               </span>
               <span className="mx-4">|</span>
               <span>
-                {companyDetails?.primaryEmail ? (
-                  <a href={`mailto:${companyDetails?.primaryEmail}`}>{companyDetails?.primaryEmail}</a>
+                {companyDetails?.primaryPhoneNumber ? (
+                  <a href={`tel:${companyDetails?.primaryPhoneNumber}`}>{companyDetails?.primaryPhoneNumber}</a>
                 ) : null}
               </span>
             </div>
@@ -187,7 +182,6 @@ const Footer = () => {
             <ul className="space-y-4">
               <li><Link href="/about" className="text-gray-700 hover:text-black">About Us</Link></li>
               <li><Link href="/services" className="text-gray-700 hover:text-black">Services</Link></li>
-              <li><Link href="/programs" className="text-gray-700 hover:text-black">Programs</Link></li>
               <li><Link href="/events" className="text-gray-700 hover:text-black">Events</Link></li>
             </ul>
           </div>

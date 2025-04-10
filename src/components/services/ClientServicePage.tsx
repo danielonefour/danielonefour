@@ -76,7 +76,7 @@ export default function ClientServicePage({
                   )}
                 </div>
                 
-                <h2 className="text-3xl font-bold mb-6">Description For Our Service</h2>
+                {/* <h2 className="text-3xl font-bold mb-6">Description For Our Service</h2> */}
                 <div className="prose prose-lg max-w-none mb-10">
                   <div dangerouslySetInnerHTML={{ __html: currentService.content }} />
                 </div>

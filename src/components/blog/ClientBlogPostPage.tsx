@@ -64,7 +64,7 @@ const ClientBlogPostPage = ({ post, relatedPosts, categories, navPosts }: Client
       <main>
         <PageHeader 
           title={post.title} 
-          image={aboutImage}
+          image={post.featuredImage || aboutImage}
           breadcrumbs={breadcrumbs}
         />
 
@@ -257,29 +257,6 @@ const ClientBlogPostPage = ({ post, relatedPosts, categories, navPosts }: Client
                 </div>
 
                 {/* Download Buttons */}
-                <div className="space-y-4 mb-8">
-                  <Link href="#" className="flex items-center justify-between p-6 border border-gray-200 hover:bg-gray-50 transition-colors">
-                    <div className="flex items-center">
-                      <FiDownload className="mr-4 text-xl" />
-                      <div>
-                        <p className="font-medium">Download</p>
-                        <p>Brochure</p>
-                      </div>
-                    </div>
-                    <div className="text-3xl">↓</div>
-                  </Link>
-                  
-                  <Link href="#" className="flex items-center justify-between p-6 bg-black text-white">
-                    <div className="flex items-center">
-                      <FiFilePlus className="mr-4 text-xl" />
-                      <div>
-                        <p className="font-medium">Latest</p>
-                        <p>Articles</p>
-                      </div>
-                    </div>
-                    <div className="text-3xl">↓</div>
-                  </Link>
-                </div>
                 
                 {/* How to Contact Section */}
                 <Link href="/contact" className="block bg-header-bg p-8 hover:bg-header-bg/80 transition-colors">

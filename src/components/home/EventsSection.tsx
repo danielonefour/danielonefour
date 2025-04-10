@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FiMapPin, FiClock } from 'react-icons/fi';
 import HoleButton from '@/components/ui/HoleButton';
-import eventImage from '@/assets/images/event.png';
+import eventImage from '@/assets/images/event.jpeg';
 import { format } from 'date-fns';
 import { getUpcomingEvents, Event } from '@/lib/contentful-events';
 
@@ -151,7 +151,7 @@ const EventsSection = ({ initialEvents }: EventsSectionProps) => {
                       {/* Event Image */}
                       <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
                         <Image
-                          src={eventImage}
+                          src={event.image ?? eventImage }
                           alt={event.title}
                           fill
                           style={{ objectFit: 'cover' }}
