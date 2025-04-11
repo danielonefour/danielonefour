@@ -27,6 +27,8 @@
     "@contentful/rich-text-react-renderer": "^16.0.1",
     "@contentful/rich-text-types": "^17.0.0",
     "@flaticon/flaticon-uicons": "^3.3.1",
+    "@stripe/react-stripe-js": "^3.6.0",
+    "@stripe/stripe-js": "^7.0.0",
     "@tanstack/react-query": "^5.68.0",
     "@tanstack/react-query-devtools": "^5.68.0",
     "contentful": "^10.15.1",
@@ -38,7 +40,8 @@
     "react-icons": "^5.5.0",
     "react-loader-spinner": "^6.1.6",
     "remark": "^15.0.1",
-    "remark-html": "^16.0.1"
+    "remark-html": "^16.0.1",
+    "stripe": "^18.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

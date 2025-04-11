@@ -25,6 +25,9 @@ interface Event {
   description: string;
   content?: any;
   image?: string;
+  duration?: string;
+  amount?: number;
+  currency?: string;
 }
 
 interface ClientEventPageProps {
@@ -171,6 +174,13 @@ export default function ClientEventPage({ slug, initialEvent }: ClientEventPageP
                   </div>
                 )}
                 
+                {event.duration && (
+                  <div className="flex items-center gap-2 text-gray-700">
+                    <FiClock className="text-blue-600" size={20} />
+                    <span>{event.duration}</span>
+                  </div>
+                )}
+                
                 {event.location && (
                   <div className="flex items-center gap-2 text-gray-700">
                     <FiMapPin className="text-blue-600" size={20} />
@@ -179,10 +189,27 @@ export default function ClientEventPage({ slug, initialEvent }: ClientEventPageP
                 )}
               </div>
               
-              <div className="prose prose-lg max-w-none mb-12">
+              <div className="prose prose-lg max-w-none mb-6">
                 <h2 className="text-3xl font-bold mb-6">About This Event</h2>
                 <div className="mb-8">
                   {event.description}
+                </div>
+                
+                {/* Event pricing */}
+                <div className="bg-blue-50 p-6 rounded-lg mb-8">
+                  <h3 className="text-xl font-bold text-blue-800 mb-2">Event Details</h3>
+                  <div className="flex items-center justify-between border-b border-blue-100 py-3">
+                    <span className="text-gray-700 font-medium">Price:</span>
+                    <span className="text-lg font-bold">
+                      {event.amount ? `${event.currency || ''} ${event.amount.toFixed(2)}` : 'FREE'}
+                    </span>
+                  </div>
+                  {event.duration && (
+                    <div className="flex items-center justify-between border-b border-blue-100 py-3">
+                      <span className="text-gray-700 font-medium">Duration:</span>
+                      <span>{event.duration}</span>
+                    </div>
+                  )}
                 </div>
                 
                 {/* Rich text content */}
@@ -202,7 +229,12 @@ export default function ClientEventPage({ slug, initialEvent }: ClientEventPageP
             <div className="lg:col-span-1">
               <div className="bg-gray-50 p-8 rounded-lg sticky top-8">
                 <h2 className="text-2xl font-bold mb-6">Register for this Event</h2>
-                <EventRegistrationForm eventId={event.id} eventTitle={event.title} />
+                <EventRegistrationForm 
+                  eventId={event.id} 
+                  eventTitle={event.title} 
+                  amount={event.amount}
+                  currency={event.currency}
+                />
               </div>
             </div>
           </div>

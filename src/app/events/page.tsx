@@ -46,6 +46,27 @@ const EventCard = ({ event }: EventCardProps) => (
         </div>
       </div>
       <p className="text-gray-600 mb-4 line-clamp-3">{event.description}</p>
+      
+      {/* Price information */}
+      <div className="flex justify-between items-center mb-4">
+        <div className="text-sm font-medium">
+          {event.duration && (
+            <span className="text-gray-600">Duration: {event.duration}</span>
+          )}
+        </div>
+        <div>
+          {event.amount ? (
+            <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+              {event.currency} {event.amount.toFixed(2)}
+            </span>
+          ) : (
+            <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+              FREE
+            </span>
+          )}
+        </div>
+      </div>
+      
       <Link
         href={`/events/${event.slug}`}
         className="text-blue-600 font-medium hover:text-blue-800"

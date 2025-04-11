@@ -13,6 +13,9 @@ export interface Event {
   image?: string;
   category?: string;
   featured: boolean;
+  duration?: string;
+  amount?: number;
+  currency?: string;
 }
 
 // Response interface
@@ -53,6 +56,9 @@ function mapContentfulEvents(entries: any): Event[] {
       image: imageUrl,
       category: fields.category || undefined,
       featured: !!fields.featured,
+      duration: fields.duration || undefined,
+      amount: fields.amount !== undefined ? Number(fields.amount) : undefined,
+      currency: fields.currency || undefined,
     };
   });
 }
