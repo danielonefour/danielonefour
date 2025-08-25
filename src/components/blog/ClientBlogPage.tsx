@@ -289,7 +289,7 @@ export default function ClientBlogPage({
     
     return (
       <>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
           {blogResponse.items.map(post => (
             <BlogCard key={post.id} post={post} />
           ))}
@@ -386,28 +386,7 @@ export default function ClientBlogPage({
             </div>
 
             {/* Contact Info */}
-            <div className="mb-8">
-              <h3 className="text-xl font-bold mb-6">Get In Touch With Us</h3>
-              
-              <div className="space-y-4">
-                <div>
-                  <div className="flex items-center mb-2">
-                    <FiMail className="mr-2" />
-                    <span className="font-medium">Info@Example.Com</span>
-                  </div>
-                  <p className="text-gray-600 pl-6">Contact@Example.Com</p>
-                </div>
-                
-                <div>
-                  <div className="flex items-center mb-2">
-                    <FiPhone className="mr-2" />
-                    <span className="font-medium">+668 66 448 6452 99</span>
-                  </div>
-                  <p className="text-gray-600 pl-6">+7896 875 987 54</p>
-                </div>
-              </div>
-            </div>
-
+          
             {/* Download Buttons */}
             <div className="space-y-4 mb-8">
               <Link href="#" className="flex items-center justify-between p-6 border border-gray-200 hover:bg-gray-50 transition-colors">
@@ -439,7 +418,7 @@ export default function ClientBlogPage({
                 <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center">
                   <FiMessageCircle className="text-white text-xl" />
                 </div>
-                <h3 className="text-xl font-bold">How can I contact<br />Daniel-One-Four</h3>
+                <h3 className="text-xl font-bold">How can I contact<br />Daniel-One-Four?</h3>
               </div>
               <p className="text-gray-700">
                 Get in touch with our team today to discuss your coaching needs and discover how we can help you achieve your goals.

@@ -1,191 +1,116 @@
 'use client';
-
 import React, { useState } from 'react';
 import Image from 'next/image';
 import HoleButton from '@/components/ui/HoleButton';
 import coachingImage from '@/assets/images/coaching.png';
 import { useAllServices } from '@/hooks/use-contentful';
-import { Oval } from 'react-loader-spinner';
 import { Service } from '@/lib/contentful';
+import { FiAlertTriangle, FiStar, FiHeart, FiCoffee, FiZap } from 'react-icons/fi';
 import Link from 'next/link';
-import { FiAlertTriangle } from 'react-icons/fi';
 
 interface ServicesProps {
   initialServices?: Service[];
 }
 
-const CoachingExperienceSection = ({ initialServices }: ServicesProps) => {
-  // State to track the active experience
-  const [activeExperience, setActiveExperience] = useState(0);
-  
-  // Fetch services from Contentful - use initialServices as fallback data
+const icons = [FiStar, FiHeart, FiCoffee, FiZap];
+
+const GenZCoachingSection = ({ initialServices }: ServicesProps) => {
+  const [activeIndex, setActiveIndex] = useState(0);
   const { data: servicesData = [], isLoading, error, refetch } = useAllServices({
     initialData: initialServices,
-    enabled: !initialServices // Only fetch if we don't have initial data
+    enabled: !initialServices,
   });
-  
-  // Use either the fetched data or the initial data
+
   const services = servicesData || initialServices || [];
 
-  // Function to format the count number with leading zero
-  const formatCount = (index: number): string => {
-    return `${index + 1}`.padStart(2, '0');
-  };
-
-  // Show loading state while fetching data and no initial data
   if (isLoading && !initialServices) {
     return (
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <div className="uppercase tracking-wider text-sm font-medium mb-4">
-              SERVICES
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold">
-              We Offer Exceptional Training Experiences
-            </h2>
-          </div>
-          <div className="flex justify-center items-center py-20">
-            <Oval
-              height={60}
-              width={60}
-              color="#1699C1"
-              secondaryColor="#e0f2fe"
-              strokeWidth={4}
-              strokeWidthSecondary={4}
-            />
-          </div>
-        </div>
+      <section className="bg-gradient-to-r from-pink-50 via-purple-50 to-blue-50 py-20 text-center">
+        <h2 className="text-4xl font-extrabold text-purple-700 mb-8">Loading the Fun...</h2>
       </section>
     );
   }
 
-  // If there's an error loading the services, display error message
   if ((error || services.length === 0) && !initialServices) {
     return (
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <div className="uppercase tracking-wider text-sm font-medium mb-4">
-              SERVICES
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold">
-              Offer Exceptional Coaching Experiences
-            </h2>
-          </div>
-          <div className="flex flex-col items-center justify-center py-20">
-            <FiAlertTriangle className="text-red-500 mb-4" size={48} />
-            <h3 className="text-xl font-bold mb-2">Unable to load services</h3>
-            <p className="text-gray-600 mb-6 text-center max-w-md">
-              {error ? 'There was an error loading our services.' : 'No services are currently available.'}
-            </p>
-            <button 
-              onClick={() => refetch()}
-              className="bg-brand-blue text-white px-6 py-2 rounded hover:bg-opacity-90 transition-colors"
-            >
-              Try Again
-            </button>
-            <Link 
-              href="/services"
-              className="mt-4 text-brand-blue hover:underline"
-            >
-              View All Services
-            </Link>
-          </div>
-        </div>
+      <section className="bg-red-50 py-20 text-center">
+        <FiAlertTriangle className="text-red-500 h-12 w-12 mx-auto mb-4" />
+        <h3 className="text-2xl font-bold text-red-600 mb-4">Oops! No services loaded</h3>
+        <button
+          onClick={() => refetch()}
+          className="bg-pink-500 text-white px-6 py-3 rounded-full hover:scale-105 transition-transform"
+        >
+          Try Again
+        </button>
+        <Link href="/services" className="block mt-4 text-purple-600 font-bold hover:underline">
+          Browse All Services
+        </Link>
       </section>
     );
   }
 
-  // Map Contentful services to the format expected by the UI
-  const experiences = services.map(service => ({
-    title: service.title,
-    subtitle: service.title,
-    description: service.description,
-    link: `/services/${service.slug}`,
-  }));
+  return (
+<section className="pt-16 pb-8 md:pt-20 md:pb-20 lg:pt-32 bg-brand-yellow">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <div className="text-center mb-12" data-aos="fade-up">
+          <p className="text-sm font-semibold uppercase text-pink-500 mb-2 tracking-wide">Our Services</p>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-zinc-800 mb-2">Level Up With Us!</h2>
+          <p className="text-gray-700 max-w-xl mx-auto">Interactive coaching experiences made for you</p>
+        </div>
 
-  return renderContent(experiences);
-
-  // Helper function to render the content with either real or fallback data
-  function renderContent(experiencesData: any[]) {
-    return (
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-6">
-          {/* Section Title */}
-          <div className="text-center mb-16">
-            <div className="uppercase tracking-wider text-sm font-medium mb-4">
-              SERVICES
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold">
-              Offer Exceptional Coaching Experiences
-            </h2>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-            {/* Left Column - Numbers List */}
-            <div className="lg:col-span-3">
-              <div className="space-y-8">
-                {experiencesData.map((exp, index) => (
-                  <div 
-                    key={index} 
-                    className="flex items-start gap-4 cursor-pointer"
-                    onClick={() => setActiveExperience(index)}
-                  >
-                    <div className={`text-2xl font-bold ${activeExperience === index ? 'text-black' : 'text-gray-400'}`}>
-                      {formatCount(index)}
-                    </div>
-                    <div>
-                      <h3 className={`text-xl font-bold ${activeExperience === index ? 'underline' : ''}`}>
-                        {exp.title}
-                      </h3>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            {/* Middle Column - Content */}
-            <div className="lg:col-span-4 border-l border-gray-200 pl-8">
-              <h3 className="text-3xl font-bold mb-6">
-                {experiencesData[activeExperience]?.subtitle}
-              </h3>
-              
-              <p className="text-gray-600 mb-8">
-                {experiencesData[activeExperience]?.description}
-              </p>
-              
-              <HoleButton 
-                href={experiencesData[activeExperience]?.link}
-                bgColorClass="bg-brand-orange"
+        {/* Services Carousel */}
+        <div className="flex overflow-x-auto space-x-6 py-6 scrollbar-hide">
+          {services.map((service, index) => {
+            const Icon = icons[index % icons.length];
+            return (
+              <div
+                key={index}
+                onClick={() => setActiveIndex(index)}
+                className={`flex-shrink-0 w-72 md:w-80 p-6 rounded-2xl shadow-lg cursor-pointer transform transition duration-300 hover:scale-105 ${
+                  activeIndex === index ? 'bg-orange-100 shadow-2xl' : 'bg-white'
+                }`}
+                data-aos="fade-up"
+                data-aos-delay={`${index * 100}`}
               >
-                <span className="mr-4">Discover More</span>
-              </HoleButton>
-            </div>
-            
-            {/* Right Column - Image */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative h-[500px] w-full">
-                <Image
-                  src={coachingImage}
-                  alt="Coaching Experience"
-                  fill
-                  style={{ objectFit: 'cover' }}
-                />
-                
-                {/* Overlay text */}
-                <div className="absolute bottom-0 left-0 transform translate-y-8 translate-x-[-20px] bg-header-bg p-6 max-w-[250px]">
-                  <h3 className="text-xl font-bold">
-                    Friendly And Efficient Business Coaches
-                  </h3>
+                <div className="text-3xl text-orange-500 mb-3">
+                  <Icon />
                 </div>
+                <h3 className="font-bold text-xl text-zinc-800 mb-2">{service.title}</h3>
+                <p className="text-gray-600 mb-4 line-clamp-3">{service.description}</p>
+                <HoleButton
+                  href={`/services/${service.slug}`}
+                  bgColorClass="bg-pink-500 hover:bg-pink-600 text-white"
+                >
+                  <span>Peep This! <br /></span>
+                </HoleButton>
               </div>
+            );
+          })}
+        </div>
+
+        {/* Featured Service Image */}
+        {services[activeIndex] && (
+          <div
+            className="relative mt-12 rounded-3xl overflow-hidden shadow-2xl group"
+            data-aos="zoom-in"
+          >
+            <Image
+              src={coachingImage}
+              alt={services[activeIndex].title}
+              className="h-80 md:h-[400px] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+            <div className="absolute bottom-0 left-0 bg-white p-6 rounded-tr-2xl shadow-lg max-w-xs md:max-w-sm">
+              <h3 className="font-bold text-xl text-purple-800">{services[activeIndex].title}</h3>
+              <p className="text-gray-700 text-sm line-clamp-2">{services[activeIndex].description}</p>
             </div>
           </div>
-        </div>
-      </section>
-    );
-  }
+        )}
+      </div>
+    </section>
+  );
 };
 
-export default CoachingExperienceSection; 
+export default GenZCoachingSection;

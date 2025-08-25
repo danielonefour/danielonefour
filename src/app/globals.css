@@ -12,6 +12,11 @@
     --brand-orange-color: #F9BE70;
 }
 
+html, body {
+  overflow-x: hidden !important;
+}
+
+
 @media (prefers-color-scheme: dark) {
     :root {
         --foreground-rgb: 255, 255, 255;
@@ -30,6 +35,8 @@ body {
     overflow: visible;
     transition: all 0.3s ease;
 }
+
+
 
 .header-button:hover {
     background-color: #333;
@@ -71,6 +78,15 @@ body {
     transform: translateY(-50%);
 }
 
+/* In your CSS file (e.g., globals.css) */
+.custom-image-shape {
+  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%, 0% 100%, 0 85%);
+  /* The points need to be adjusted based on the curve depth you want. */
+  /* This is a close approximation. You might need to fine-tune it. */
+  border-top-left-radius: 100px; /* Optional: Adds a small curve to the top-left */
+  border-bottom-left-radius: 100px; /* Optional: Adds a small curve to the bottom-left */
+}
+
 /* Add our custom animations for the team section */
 @keyframes fadeSlideUp {
     0% {
@@ -103,6 +119,15 @@ body {
 .animate-fade-slide-up {
     animation: fadeSlideUp 0.5s ease-out forwards;
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
 
 /* Blog Styling */
 @layer components {

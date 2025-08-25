@@ -29,7 +29,7 @@ const HeroSection = () => {
 
   if (isLoading || !slides || slides.length === 0) {
     return (
-      <div className="relative h-[500px] bg-gray-200 flex items-center justify-center">
+      <div className="relative h-[500px] bg-brand-yellow flex items-center justify-center">
         <div className="text-center">
           <div className="h-10 w-64 bg-gray-300 animate-pulse rounded-md mb-4 mx-auto"></div>
           <div className="h-4 w-80 bg-gray-300 animate-pulse rounded-md mx-auto mb-2"></div>
