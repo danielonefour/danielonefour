@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-plus-jakarta-sans)'],
+        sans: ['var(--font-poppins)'],
       },
       colors: {
         primary: {
@@ -49,11 +49,22 @@ const config: Config = {
         brand: {
           blue: '#1699C1',
           orange: '#F9BE70',
+          yellow: '#fef9ef',
+          lightBlue: '#e0f2fe',
         },
+      },
+      keyframes: {
+        scroll: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+      },
+      animation: {
+        scroll: 'scroll 30s linear infinite',
       },
     },
   },
   plugins: [],
 }
 
-export default config 
+export default config

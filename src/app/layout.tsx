@@ -1,13 +1,15 @@
 import type { Metadata } from 'next'
-import { Plus_Jakarta_Sans } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import './globals.css'
-// Import Flaticon UI icons CSS
-import '@flaticon/flaticon-uicons/css/all/all.css'
-import ReactQueryProvider from '@/lib/react-query-provider'
+import "@flaticon/flaticon-uicons/css/all/all.css";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+
+import ReactQueryProvider from '@/lib/react-query-provider'
+import AOSInit from '@/components/layout/AOSInit'
+
+const poppins = Poppins({
   subsets: ['latin'],
-  variable: '--font-plus-jakarta-sans',
+  variable: '--font-poppins',
   display: 'swap',
   weight: ['400', '500', '600', '700'],
 })
@@ -23,9 +25,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={plusJakartaSans.variable}>
+    <html lang="en" className={poppins.variable}>
       <body className="font-sans antialiased bg-white text-gray-900 min-h-screen">
         <ReactQueryProvider>
+          <AOSInit />
           {children}
         </ReactQueryProvider>
       </body>

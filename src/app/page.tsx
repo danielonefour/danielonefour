@@ -1,12 +1,17 @@
-import React from 'react';
-import dynamic from 'next/dynamic';
-import { Metadata } from 'next';
-import HeroSection from '@/components/home/HeroSection';
-import { getAllServices } from '@/lib/contentful';
-import { getFeaturedBlogPosts } from '@/lib/contentful';
-import { getUpcomingEvents } from '@/lib/contentful-events';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
+import React from "react";
+import dynamic from "next/dynamic";
+import { Metadata } from "next";
+import { getAllServices } from "@/lib/contentful";
+import { getFeaturedBlogPosts } from "@/lib/contentful";
+import { getUpcomingEvents } from "@/lib/contentful-events";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import ContactUs from "@/components/home/ContactUs";
+import HeroSection from "@/components/layout/HeroSection";
+import PopularDestinations from "@/components/home/PopularDestinations";
+import DownloadBook from "@/components/layout/DownloadBook";
+import InfiniteScroll from "@/components/layout/InfiniteScroll";
+import FAQSection from "@/components/layout/FAQSection";
 
 // Loading component for dynamic imports
 const LoadingSpinner = () => (
@@ -17,29 +22,39 @@ const LoadingSpinner = () => (
 
 // Dynamic imports with loading fallbacks
 
-const ClientsSection = dynamic(() => import('@/components/home/ClientsSection'), {
-  loading: () => <LoadingSpinner />
+const ClientsSection = dynamic(
+  () => import("@/components/home/ClientsSection"),
+  {
+    loading: () => <LoadingSpinner />,
+  }
+);
+
+const ServicesSection = dynamic(
+  () => import("@/components/home/ServicesSection"),
+  {
+    loading: () => <LoadingSpinner />,
+  }
+);
+
+const TestimonialsSection = dynamic(
+  () => import("@/components/home/TestimonialsSection"),
+  {
+    loading: () => <LoadingSpinner />,
+  }
+);
+
+const EventsSection = dynamic(() => import("@/components/home/EventsSection"), {
+  loading: () => <LoadingSpinner />,
 });
 
-const ServicesSection = dynamic(() => import('@/components/home/ServicesSection'), {
-  loading: () => <LoadingSpinner />
-});
-
-const TestimonialsSection = dynamic(() => import('@/components/home/TestimonialsSection'), {
-  loading: () => <LoadingSpinner />
-});
-
-const EventsSection = dynamic(() => import('@/components/home/EventsSection'), {
-  loading: () => <LoadingSpinner />
-});
-
-const BlogSection = dynamic(() => import('@/components/home/BlogSection'), {
-  loading: () => <LoadingSpinner />
+const BlogSection = dynamic(() => import("@/components/home/BlogSection"), {
+  loading: () => <LoadingSpinner />,
 });
 
 export const metadata: Metadata = {
-  title: 'Daniel One Four - Coaching, Training, and Consulting',
-  description: 'Empower your leadership journey with Daniel One Four. We provide executive coaching, leadership training, and consulting services.',
+  title: "Daniel One Four - Coaching, Training, and Consulting",
+  description:
+    "Empower your leadership journey with Daniel One Four. We provide executive coaching, leadership training, and consulting services.",
 };
 
 // Revalidate page every 10 minutes
@@ -55,16 +70,19 @@ export default async function Home() {
 
   return (
     <>
-    <Header />
-    <main>
-      <HeroSection />
-      <ClientsSection />
-      <ServicesSection initialServices={initialServices} />
-      <TestimonialsSection />
-      <EventsSection initialEvents={initialEvents} />
-      <BlogSection initialPosts={initialPosts} />
-    </main>
-    <Footer />
+      <Header />
+      <main>
+        <HeroSection />
+        <InfiniteScroll />
+
+        <ClientsSection />
+
+        <ServicesSection initialServices={initialServices} />
+
+        <TestimonialsSection />
+        <BlogSection initialPosts={initialPosts} />
+      </main>
+      <Footer />
     </>
   );
 }

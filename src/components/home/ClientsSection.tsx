@@ -81,65 +81,58 @@ const ClientsSection = () => {
   }, [totalSlides]);
 
   return (
-    <section className="py-16 md:py-24 bg-light-gray">
+    <section className="bg-brand-orange py-16 md:py-24">
       {/* About Section */}
-      <div className="container mx-auto px-6 mb-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Left Content */}
-          <div>
-            {companyDetails ? (
-            <>
-            <div className="mb-4 uppercase tracking-wider text-sm font-medium">
-              ABOUT US
-            </div>
-            <h2 className="text-4xl font-bold mb-6">
-              Hello,<br />
-              {companyDetails?.introTitle}
-            </h2>
-            <div className="mb-8">
-              <p className="text-gray-600">
-                {companyDetails?.introDescription}
-              </p>
-            </div>
-            
-            <div className="flex flex-wrap items-center gap-6 mb-12">
-              <HoleButton 
-                href="/contact"
-                bgColorClass="bg-brand-orange"
-              >
-                <span className="mr-4">Get in touch</span>
-              </HoleButton>
-            </div>
-            </>
-            ) : (
-              // Add a loading skeleton
-              <div className="py-4 text-gray-500">
-                <div className="h-10 bg-gray-200 rounded-md w-1/3 mb-2"></div>
-                <div className="h-6 bg-gray-200 rounded-md w-3/4 mb-4"></div>
-                <div className="h-4 bg-gray-200 rounded-md w-full"></div>
-              </div>
-            )}
-            
-          </div>
-          
-          {/* Right Content - Image with overlay */}
-          <div className="relative flex items-end" style={{ minHeight: '500px' }}>
-            <div className="relative h-[500px] w-full">
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+          {/* Left Content - Image */}
+          <div className="relative flex-1 w-full lg:w-1/2">
+            <div className="group relative h-96 sm:h-[500px] w-full overflow-hidden rounded-3xl shadow-2xl">
               <Image
                 src={aboutImage}
                 alt="Life Coach"
                 fill
                 style={{ objectFit: 'cover' }}
-                className="rounded-sm"
+                className="transition-transform duration-500 group-hover:scale-105"
               />
-              
-              {/* Action overlay - offset from the image */}
-              <div className="absolute bottom-0 left-0 transform translate-y-8 translate-x-[-20px] bg-header-bg p-6 max-w-[250px]">
-                <h3 className="text-xl font-bold">
-                  {companyDetails?.introTagLine}
-                </h3>
-              </div>
             </div>
+            
+        
+          </div>
+          
+          {/* Right Content - Text */}
+          <div className="flex-1 w-full lg:w-1/2 lg:mt-0 text-white">
+            {companyDetails ? (
+            <>
+            <span className="inline-block px-3 py-1 mb-4 text-xs sm:text-sm font-semibold tracking-wide text-zinc-700 bg-brand-orange/10 rounded-full uppercase">
+              About Us
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-zinc-700 leading-tight mb-6">
+              {companyDetails?.introTitle}
+            </h2>
+            <div className="mb-8 text-lg text-zinc-700 space-y-4">
+              <p>
+                {companyDetails?.introDescription}
+              </p>
+            </div>
+            
+            <HoleButton 
+              href="/contact"
+              bgColorClass="bg-brand-orange"
+            >
+              <span className="mr-4">Get in touch</span>
+            </HoleButton>
+            </>
+            ) : (
+              // Add a loading skeleton
+              <div className="animate-pulse py-4 text-gray-500">
+                <div className="h-4 w-24 mb-4 bg-neutral-700 rounded-full"></div>
+                <div className="h-10 w-2/3 mb-2 bg-neutral-700 rounded-md"></div>
+                <div className="h-6 w-3/4 mb-4 bg-neutral-700 rounded-md"></div>
+                <div className="h-4 w-full bg-neutral-700 rounded-md"></div>
+              </div>
+            )}
+            
           </div>
         </div>
       </div>
@@ -147,4 +140,4 @@ const ClientsSection = () => {
   );
 };
 
-export default ClientsSection; 
+export default ClientsSection;
