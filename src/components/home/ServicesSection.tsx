@@ -50,13 +50,13 @@ const GenZCoachingSection = ({ initialServices }: ServicesProps) => {
   }
 
   return (
-<section className="pt-16 pb-8 md:pt-20 md:pb-20 lg:pt-32 bg-brand-yellow">
+    <section className="pt-16 pb-8 md:pt-20 md:pb-20 lg:pt-32 bg-brand-yellow">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12" data-aos="fade-up">
-          <p className="text-sm font-semibold uppercase text-pink-500 mb-2 tracking-wide">Our Services</p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-zinc-800 mb-2">Level Up With Us!</h2>
-          <p className="text-gray-700 max-w-xl mx-auto">Interactive coaching experiences made for you</p>
+          <p className="text-sm font-semibold uppercase text-pink-500 mb-2 tracking-wide">What We Do</p>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-zinc-800 mb-2">Learn and Grow With Us!</h2>
+          <p className="text-gray-700 max-w-xl mx-auto">Fun ways to learn new skills.</p>
         </div>
 
         {/* Services Carousel */}
@@ -67,9 +67,8 @@ const GenZCoachingSection = ({ initialServices }: ServicesProps) => {
               <div
                 key={index}
                 onClick={() => setActiveIndex(index)}
-                className={`flex-shrink-0 w-72 md:w-80 p-6 rounded-2xl shadow-lg cursor-pointer transform transition duration-300 hover:scale-105 ${
-                  activeIndex === index ? 'bg-orange-100 shadow-2xl' : 'bg-white'
-                }`}
+                className={`flex-shrink-0 w-72 md:w-80 p-6 rounded-2xl shadow-lg cursor-pointer transform transition duration-300 hover:scale-105 ${activeIndex === index ? 'bg-orange-100 shadow-2xl' : 'bg-white'
+                  }`}
                 data-aos="fade-up"
                 data-aos-delay={`${index * 100}`}
               >

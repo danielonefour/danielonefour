@@ -13,28 +13,28 @@ const TestimonialsSection = () => {
   const [error, setError] = useState<string | null>(null);
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
   const [windowWidth, setWindowWidth] = useState<number>(0);
-  
+
   // Number of testimonials to show per slide based on screen width
   const testimonialsPerSlide = windowWidth < 768 ? 1 : 2;
-  
+
   // Calculate total slides based on testimonials length and how many we show per slide
-  const totalSlides = testimonials.length > 0 
-    ? Math.ceil(testimonials.length / testimonialsPerSlide) 
+  const totalSlides = testimonials.length > 0
+    ? Math.ceil(testimonials.length / testimonialsPerSlide)
     : 0;
 
   useEffect(() => {
     // Set initial window width
     setWindowWidth(window.innerWidth);
-    
+
     // Add resize listener
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
-    
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  
+
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
@@ -68,12 +68,12 @@ const TestimonialsSection = () => {
   // Auto-scroll carousel
   useEffect(() => {
     if (totalSlides <= 1) return;
-    
+
     // Auto-rotate every 10 seconds
     autoPlayRef.current = setInterval(() => {
       nextSlide();
     }, 10000);
-    
+
     return () => {
       if (autoPlayRef.current) {
         clearInterval(autoPlayRef.current);
@@ -86,13 +86,13 @@ const TestimonialsSection = () => {
     if (autoPlayRef.current) {
       clearInterval(autoPlayRef.current);
     }
-    
+
     if (direction === 'prev') {
       prevSlide();
     } else {
       nextSlide();
     }
-    
+
     // Restart auto-rotation (10 seconds interval)
     if (totalSlides > 1) {
       autoPlayRef.current = setInterval(() => {
@@ -148,27 +148,27 @@ const TestimonialsSection = () => {
   return (
     <section className="bg-brand-blue py-16 md:py-24 text-zinc-200">
       <div className="container mx-auto px-6">
-        <div className="flex justify-between items-end mb-8">
+        <div className="flex justify-between items-end mb-8" data-aos="fade-right">
           <div>
             <div className="uppercase tracking-widest text-xs md:text-sm font-semibold text-white mb-3">
-          Testimonials
-        </div>
-        <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-white">
-          Client Stories
-        </h2>
+              Testimonials
+            </div>
+            <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-white">
+              Client Stories
+            </h2>
 
           </div>
-          
+
           {totalSlides > 1 && (
             <div className="flex gap-4">
-              <button 
+              <button
                 onClick={() => handleManualNavigation('prev')}
                 className="w-12 h-12 bg-zinc-800 border-2 border-zinc-700 rounded-full flex items-center justify-center hover:bg-zinc-700 transition-colors duration-300 group"
                 aria-label="Previous testimonial"
               >
                 <FiArrowLeft size={20} className="text-zinc-400 group-hover:text-white transition-colors" />
               </button>
-              <button 
+              <button
                 onClick={() => handleManualNavigation('next')}
                 className="w-12 h-12 bg-zinc-800 border-2 border-zinc-700 rounded-full flex items-center justify-center hover:bg-zinc-700 transition-colors duration-300 group"
                 aria-label="Next testimonial"
@@ -178,28 +178,30 @@ const TestimonialsSection = () => {
             </div>
           )}
         </div>
-        
+
         {/* Divider line */}
         <div className="w-full h-px bg-brand-lightBlue mb-16"></div>
-        
+
         {/* Testimonial Grid with spacing and padding adjustments */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
           {visibleTestimonials.map((testimonial, index) => (
-            <div 
-              key={`${currentSlide}-${index}`} 
+            <div
+              key={`${currentSlide}-${index}`}
               className="flex flex-col gap-6 p-6 md:p-8 bg-brand-lightBlue rounded-xl shadow-2xl relative"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
             >
               {/* Quote Icon */}
               <RiDoubleQuotesL size={48} className="absolute top-6 left-6 text-zinc-700 opacity-20" />
-              
+
               {/* Testimonial Content */}
               <p className="text-lg text-zinc-700 font-light mt-8">
                 {testimonial.quote}
               </p>
-              
+
               <div className="flex items-center gap-4 mt-4">
                 {/* Profile Image */}
-                <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-zinc-78888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888800 flex-shrink-0">
+                <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-zinc-700 flex-shrink-0">
                   {testimonial.image ? (
                     <Image
                       src={testimonial.image}
@@ -214,7 +216,7 @@ const TestimonialsSection = () => {
                     </div>
                   )}
                 </div>
-                
+
                 {/* Profile Info */}
                 <div className="flex flex-col">
                   <h3 className="text-xl font-semibold text-zinc-500">{testimonial.name}</h3>

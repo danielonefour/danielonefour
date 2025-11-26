@@ -5,12 +5,13 @@ import "@flaticon/flaticon-uicons/css/all/all.css";
 
 
 import ReactQueryProvider from '@/lib/react-query-provider'
+import AOSInit from '@/components/layout/AOSInit'
 
 const poppins = Poppins({
   subsets: ['latin'],
   variable: '--font-poppins',
   display: 'swap',
-  weight: ['400', '500', '600', '700'], 
+  weight: ['400', '500', '600', '700'],
 })
 
 export const metadata: Metadata = {
@@ -27,6 +28,7 @@ export default function RootLayout({
     <html lang="en" className={poppins.variable}>
       <body className="font-sans antialiased bg-white text-gray-900 min-h-screen">
         <ReactQueryProvider>
+          <AOSInit />
           {children}
         </ReactQueryProvider>
       </body>
