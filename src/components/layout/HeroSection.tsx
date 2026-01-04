@@ -53,9 +53,9 @@ export default function HeroSection() {
         <div className="relative h-[400px] md:h-[500px] lg:h-[550px]" data-aos="fade-left" data-aos-delay="200">
           <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
             <img
-              src="/hero.png"
-              alt="Smiling person"
-              className="w-full h-full object-cover object-center"
+              src="/images/author/leader-chess.jpg"
+              alt="Oyinkansola Adedapo - Leadership Coach"
+              className="w-full h-full object-cover object-top"
             />
             {/* Image Overlay */}
             <div className="absolute inset-0 bg-neutral-900 opacity-20 transition-opacity duration-300"></div>

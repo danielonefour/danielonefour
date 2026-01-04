@@ -6,12 +6,10 @@ import { getFeaturedBlogPosts } from "@/lib/contentful";
 import { getUpcomingEvents } from "@/lib/contentful-events";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import ContactUs from "@/components/home/ContactUs";
 import HeroSection from "@/components/layout/HeroSection";
-import PopularDestinations from "@/components/home/PopularDestinations";
-import DownloadBook from "@/components/layout/DownloadBook";
+import AboutMeSection from "@/components/home/AboutMeSection";
+import BookSection from "@/components/home/BookSection";
 import InfiniteScroll from "@/components/layout/InfiniteScroll";
-import FAQSection from "@/components/layout/FAQSection";
 
 // Loading component for dynamic imports
 const LoadingSpinner = () => (
@@ -43,10 +41,6 @@ const TestimonialsSection = dynamic(
   }
 );
 
-const EventsSection = dynamic(() => import("@/components/home/EventsSection"), {
-  loading: () => <LoadingSpinner />,
-});
-
 const BlogSection = dynamic(() => import("@/components/home/BlogSection"), {
   loading: () => <LoadingSpinner />,
 });
@@ -62,10 +56,9 @@ export const revalidate = 600;
 
 export default async function Home() {
   // Fetch critical data in parallel at build time
-  const [initialServices, initialPosts, initialEvents] = await Promise.all([
+  const [initialServices, initialPosts] = await Promise.all([
     getAllServices(),
     getFeaturedBlogPosts(),
-    getUpcomingEvents(3),
   ]);
 
   return (
@@ -74,10 +67,14 @@ export default async function Home() {
       <main>
         <HeroSection />
         <InfiniteScroll />
+        
+        <AboutMeSection />
 
         <ClientsSection />
 
         <ServicesSection initialServices={initialServices} />
+
+        <BookSection />
 
         <TestimonialsSection />
         <BlogSection initialPosts={initialPosts} />
