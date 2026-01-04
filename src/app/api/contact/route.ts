@@ -2,23 +2,18 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from 'contentful-management';
 import nodemailer from 'nodemailer';
 
-// Initialize the contentful management client
-const client = createClient({
-  accessToken: process.env.CONTENTFUL_MANAGEMENT_TOKEN || '',
-});
-
-// Create nodemailer transporter
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST || 'smtp.mailtrap.io',
-  port: Number(process.env.EMAIL_PORT) || 2525,
-  auth: {
-    user: process.env.EMAIL_USER || '',
-    pass: process.env.EMAIL_PASSWORD || '',
-  },
-});
-
 // Function to submit form data to Contentful
 async function submitToContentful(formData: any) {
+  const accessToken = process.env.CONTENTFUL_MANAGEMENT_TOKEN;
+  if (!accessToken) {
+    console.error('CONTENTFUL_MANAGEMENT_TOKEN is missing');
+    return null;
+  }
+
+  const client = createClient({
+    accessToken: accessToken,
+  });
+
   try {
     const space = await client.getSpace(process.env.CONTENTFUL_SPACE_ID || '');
     const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT || 'master');
@@ -50,6 +45,15 @@ async function submitToContentful(formData: any) {
 
 // Function to send notification email
 async function sendEmail(formData: any) {
+  // Create nodemailer transporter
+  const transporter = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST || 'smtp.mailtrap.io',
+    port: Number(process.env.EMAIL_PORT) || 2525,
+    auth: {
+      user: process.env.EMAIL_USER || '',
+      pass: process.env.EMAIL_PASSWORD || '',
+    },
+  });
   try {
     const recipientEmail = process.env.NOTIFICATION_EMAIL || 'admin@danielonefour.com';
     
