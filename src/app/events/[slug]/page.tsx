@@ -25,8 +25,8 @@ export async function generateStaticParams() {
   }
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const slug = params.slug;
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
   const event = await getEventBySlug(slug);
   
   if (!event) {
@@ -48,13 +48,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function EventPage({ params }: { params: { slug: string } }) {
+export default async function EventPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   // Pre-fetch the event data on the server for SEO
-  const event = await getEventBySlug(params.slug);
+  const event = await getEventBySlug(slug);
   
   if (!event) {
     notFound();
   }
   
-  return <ClientEventPage slug={params.slug} initialEvent={event} />;
+  return <ClientEventPage slug={slug} initialEvent={event} />;
 } 

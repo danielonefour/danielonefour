@@ -52,8 +52,8 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for SEO
-export async function generateMetadata({ params }: { params: { tag: string } }): Promise<Metadata> {
-  const tag = params.tag;
+export async function generateMetadata({ params }: { params: Promise<{ tag: string }> }): Promise<Metadata> {
+  const { tag } = await params;
   
   // Format the tag name for display
   const tagName = tag
@@ -69,9 +69,9 @@ export async function generateMetadata({ params }: { params: { tag: string } }):
 }
 
 // Server component that passes data to the client component
-export default async function TagPage({ params }: { params: { tag: string } }) {
+export default async function TagPage({ params }: { params: Promise<{ tag: string }> }) {
   try {
-    const tagSlug = params.tag;
+    const { tag: tagSlug } = await params;
     
     // Format tag name from slug
     const tagName = tagSlug

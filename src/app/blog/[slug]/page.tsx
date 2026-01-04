@@ -36,8 +36,8 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for SEO
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const slug = params.slug;
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
   
   if (!post) {
@@ -60,9 +60,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 // Server component that passes data to the client component
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   try {
-    const slug = params.slug;
+    const { slug } = await params;
     
     // Fetch all required data on the server
     const [post, allPosts, categories] = await Promise.all([

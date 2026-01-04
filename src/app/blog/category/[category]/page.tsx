@@ -9,14 +9,14 @@ import aboutImage from '@/assets/images/about.png';
 import ClientCategoryPage from '@/components/blog/ClientCategoryPage';
 
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     category: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
+  }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
-  const category = params.category;
+  const { category } = await params;
   
   // Format the category name for display
   const categoryTitle = category
@@ -32,8 +32,9 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 }
 
 export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
-  const category = params.category;
-  const pageParam = searchParams?.page;
+  const { category } = await params;
+  const awaitedSearchParams = await searchParams;
+  const pageParam = awaitedSearchParams?.page;
   const currentPage = pageParam 
     ? parseInt(Array.isArray(pageParam) ? pageParam[0] : pageParam) 
     : 1;

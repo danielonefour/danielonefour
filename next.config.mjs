@@ -7,13 +7,15 @@ const nextConfig = {
         // your project has type errors.
         ignoreBuildErrors: true,
     },
-    // Ignore ESLint errors in the build
-    eslint: {
-        // Disable ESLint running during build
-        ignoreDuringBuilds: true,
-    },
     images: {
-        domains: ['images.ctfassets.net'], // Allow Contentful image domains
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'images.ctfassets.net',
+                port: '',
+                pathname: '/**',
+            },
+        ],
     },
     // Include all Contentful environment variables with proper error handling
     env: {
