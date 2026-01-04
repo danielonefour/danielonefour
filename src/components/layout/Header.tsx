@@ -22,11 +22,10 @@ function Header() {
   };
 
   const navLinks = [
+    { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
-    { name: "The Visionary", path: "/#about-me" },
-    { name: "Services", path: "/services" },
-    { name: "The Book", path: "/#book" },
     { name: "Events", path: "/events" },
+    { name: "Services", path: "/services" },
     { name: "Blog", path: "/blog" },
     { name: "Contact Us", path: "/contact" },
   ];
