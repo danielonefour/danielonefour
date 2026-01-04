@@ -26,11 +26,28 @@ export interface CompanyDetails {
   };
 }
 
-// Create Contentful client
-const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID || '',
-  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || '',
-});
+// Replace module-level client initialization with a singleton lazy getter
+let contentfulClient: any = null;
+
+function getClient() {
+  if (!contentfulClient) {
+    const spaceId = process.env.CONTENTFUL_SPACE_ID;
+    const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
+    
+    if (!spaceId || !accessToken) {
+      console.error('Contentful environment variables missing in contentful-company-details.ts');
+      return {
+        getEntries: () => Promise.resolve({ items: [], total: 0, skip: 0, limit: 0 })
+      } as any;
+    }
+
+    contentfulClient = createClient({
+      space: spaceId,
+      accessToken: accessToken,
+    });
+  }
+  return contentfulClient;
+}
 
 // Map Contentful response to CompanyDetails object
 function mapContentfulCompanyDetails(entry: Entry<any>): CompanyDetails {
@@ -62,7 +79,7 @@ function mapContentfulCompanyDetails(entry: Entry<any>): CompanyDetails {
 // Get company details
 export async function getCompanyDetails(): Promise<CompanyDetails | null> {
   try {
-    const response = await client.getEntries({
+    const response = await getClient().getEntries({
       content_type: 'companyDetails',
       limit: 1
     });

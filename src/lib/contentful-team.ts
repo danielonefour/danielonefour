@@ -46,7 +46,15 @@ const createContentfulClient = () => {
   }
 };
 
-const client = createContentfulClient();
+// Replace module-level client initialization with a singleton lazy getter
+let contentfulClient: any = null;
+
+function getClient() {
+  if (!contentfulClient) {
+    contentfulClient = createContentfulClient();
+  }
+  return contentfulClient;
+}
 
 export interface TeamMemberPhoto {
   url: string;
@@ -93,7 +101,7 @@ interface TeamMemberFields {
 
 export async function getTeamMembers(): Promise<TeamMember[]> {
   try {
-    const entries = await client.getEntries({
+    const entries = await getClient().getEntries({
       content_type: 'teamMember',
     });
 
@@ -125,7 +133,7 @@ export async function getTeamMembers(): Promise<TeamMember[]> {
 
 export async function getTeamMemberById(id: string): Promise<TeamMember | null> {
   try {
-    const entry = await client.getEntry(id);
+    const entry = await getClient().getEntry(id);
     
     const { fields } = entry;
       

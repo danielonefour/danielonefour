@@ -3,24 +3,34 @@ import { createClient } from 'contentful-management';
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 
-// Initialize the contentful management client
-const client = createClient({
-  accessToken: process.env.CONTENTFUL_MANAGEMENT_TOKEN || '',
-});
+// Helper to get Contentful Management Client
+function getContentfulClient() {
+  const accessToken = process.env.CONTENTFUL_MANAGEMENT_TOKEN;
+  if (!accessToken) {
+    console.error('CONTENTFUL_MANAGEMENT_TOKEN is missing');
+    return null;
+  }
+  return createClient({ accessToken });
+}
 
-// Create nodemailer transporter
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST || 'smtp.mailtrap.io',
-  port: Number(process.env.EMAIL_PORT) || 2525,
-  auth: {
-    user: process.env.EMAIL_USER || '',
-    pass: process.env.EMAIL_PASSWORD || '',
-  },
-});
+// Helper to get Nodemailer transporter
+function getTransporter() {
+  return nodemailer.createTransport({
+    host: process.env.EMAIL_HOST || 'smtp.mailtrap.io',
+    port: Number(process.env.EMAIL_PORT) || 2525,
+    auth: {
+      user: process.env.EMAIL_USER || '',
+      pass: process.env.EMAIL_PASSWORD || '',
+    },
+  });
+}
 
 // Function to check if email already exists
 async function checkEmailExists(email: string) {
   try {
+    const client = getContentfulClient();
+    if (!client) throw new Error('Contentful client not initialized');
+    
     const space = await client.getSpace(process.env.CONTENTFUL_SPACE_ID || '');
     const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT || 'master');
     
@@ -40,6 +50,9 @@ async function checkEmailExists(email: string) {
 // Function to submit subscriber to Contentful
 async function submitToContentful(subscriberData: any) {
   try {
+    const client = getContentfulClient();
+    if (!client) throw new Error('Contentful client not initialized');
+
     const space = await client.getSpace(process.env.CONTENTFUL_SPACE_ID || '');
     const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT || 'master');
     
@@ -71,6 +84,9 @@ async function submitToContentful(subscriberData: any) {
 // Function to update a subscriber entry
 async function updateSubscriberEntry(entryId: string, updateData: any) {
   try {
+    const client = getContentfulClient();
+    if (!client) throw new Error('Contentful client not initialized');
+
     const space = await client.getSpace(process.env.CONTENTFUL_SPACE_ID || '');
     const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT || 'master');
     
@@ -102,6 +118,7 @@ async function updateSubscriberEntry(entryId: string, updateData: any) {
 // Function to send confirmation email
 async function sendConfirmationEmail(subscriberData: any) {
   try {
+    const transporter = getTransporter();
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
     const confirmUrl = `${baseUrl}/api/newsletter/confirm?token=${subscriberData.confirmationToken}&email=${encodeURIComponent(subscriberData.email)}`;
     
@@ -257,6 +274,9 @@ export async function GET(request: NextRequest) {
     }
     
     // Check if subscriber exists with this token
+    const client = getContentfulClient();
+    if (!client) throw new Error('Contentful client not initialized');
+
     const space = await client.getSpace(process.env.CONTENTFUL_SPACE_ID || '');
     const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT || 'master');
     

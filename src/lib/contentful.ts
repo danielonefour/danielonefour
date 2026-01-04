@@ -117,7 +117,9 @@ const createContentfulClient = () => {
   }
 };
 
-const client = createContentfulClient();
+// Replace module-level client initialization with a singleton lazy getter
+let contentfulClient: any = null;
+let contentfulPreviewClient: any = null;
 
 // Initialize preview client (for draft content)
 const createPreviewClient = () => {
@@ -140,9 +142,9 @@ const createPreviewClient = () => {
     }
     
     // Fallback to regular client if available
-    if (client) {
+    if (contentfulClient) {
       console.warn('Falling back to regular Contentful client');
-      return client;
+      return contentfulClient;
     }
     
     throw new Error('Contentful preview configuration is missing. Please check your environment variables.');
@@ -159,9 +161,9 @@ const createPreviewClient = () => {
     console.error('Error creating Contentful preview client:', error);
     
     // Fallback to regular client if available
-    if (client) {
+    if (contentfulClient) {
       console.warn('Error creating preview client, falling back to regular Contentful client');
-      return client;
+      return contentfulClient;
     }
     
     // Return a mock client for development to prevent crash
@@ -176,7 +178,7 @@ const createPreviewClient = () => {
   }
 };
 
-const previewClient = createPreviewClient();
+// Removed module-level preview client initialization
 
 // Get the appropriate client based on environment
 const getClient = () => {
@@ -184,13 +186,17 @@ const getClient = () => {
     process.env.CONTENTFUL_PREVIEW === 'true' || 
     process.env.NEXT_PUBLIC_CONTENTFUL_PREVIEW === 'true';
   
-  // Check if preview mode is requested but preview client is not available
-  if (isPreview && !previewClient) {
-    console.warn('Preview mode requested but preview client not available. Using regular client.');
-    return client;
+  if (isPreview) {
+    if (!contentfulPreviewClient) {
+      contentfulPreviewClient = createPreviewClient();
+    }
+    return contentfulPreviewClient;
   }
-  
-  return isPreview ? previewClient : client;
+
+  if (!contentfulClient) {
+    contentfulClient = createContentfulClient();
+  }
+  return contentfulClient;
 };
 
 // TEAM MEMBER FUNCTIONS
@@ -447,7 +453,7 @@ export async function getBlogPostsByCategory(categorySlug: string, page = 1, per
     console.log('Using category name format:', categoryName);
     
     // Use content type filtering with fields.category using the properly formatted category name
-    const response = await client.getEntries({
+    const response = await getClient().getEntries({
       content_type: 'blogPost',
       'fields.category': categoryName, // Use the converted category name
       order: '-fields.date',

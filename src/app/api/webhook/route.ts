@@ -3,25 +3,36 @@ import { createClient } from 'contentful-management';
 import Stripe from 'stripe';
 import nodemailer from 'nodemailer';
 
-// Initialize Stripe
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  apiVersion: '2025-03-31.basil',
-});
+// Helper to get Contentful Management Client
+function getContentfulClient() {
+  const accessToken = process.env.CONTENTFUL_MANAGEMENT_TOKEN;
+  if (!accessToken) {
+    console.error('CONTENTFUL_MANAGEMENT_TOKEN is missing');
+    return null;
+  }
+  return createClient({ accessToken });
+}
 
-// Initialize Contentful Management client
-const client = createClient({
-  accessToken: process.env.CONTENTFUL_MANAGEMENT_TOKEN || '',
-});
+// Helper to get Nodemailer transporter
+function getTransporter() {
+  return nodemailer.createTransport({
+    host: process.env.EMAIL_HOST || 'smtp.mailtrap.io',
+    port: parseInt(process.env.EMAIL_PORT || '2525'),
+    auth: {
+      user: process.env.EMAIL_USER || '',
+      pass: process.env.EMAIL_PASSWORD || '',
+    },
+  });
+}
 
-// Initialize Nodemailer
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST || 'smtp.mailtrap.io',
-  port: parseInt(process.env.EMAIL_PORT || '2525'),
-  auth: {
-    user: process.env.EMAIL_USER || '',
-    pass: process.env.EMAIL_PASSWORD || '',
-  },
-});
+// Helper to get Stripe client
+function getStripe() {
+  const stripeKey = process.env.STRIPE_SECRET_KEY;
+  if (!stripeKey) return null;
+  return new Stripe(stripeKey, {
+    apiVersion: '2025-03-31.basil' as any
+  });
+}
 
 export const config = {
   api: {
@@ -37,6 +48,9 @@ export async function POST(request: Request) {
 
   // Verify the webhook signature
   try {
+    const stripe = getStripe();
+    if (!stripe) throw new Error('Stripe client not initialized');
+
     event = stripe.webhooks.constructEvent(
       body,
       signature,
@@ -73,6 +87,9 @@ async function handleCheckoutSessionCompleted(session: any) {
     }
 
     // Update the registration entry in Contentful
+    const client = getContentfulClient();
+    if (!client) throw new Error('Contentful client not initialized');
+
     const space = await client.getSpace(process.env.CONTENTFUL_SPACE_ID || '');
     const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT || 'master');
     
@@ -103,6 +120,7 @@ async function handleCheckoutSessionCompleted(session: any) {
 
     // Send payment confirmation email to customer
     if (customerEmail) {
+      const transporter = getTransporter();
       await transporter.sendMail({
         from: `"Daniel One Four" <${process.env.EMAIL_FROM || 'noreply@daniel-one-four.com'}>`,
         to: customerEmail,
@@ -124,7 +142,8 @@ async function handleCheckoutSessionCompleted(session: any) {
     }
 
     // Send notification to admin
-    await transporter.sendMail({
+    const adminTransporter = getTransporter();
+    await adminTransporter.sendMail({
       from: `"Daniel One Four" <${process.env.EMAIL_FROM || 'noreply@daniel-one-four.com'}>`,
       to: process.env.ADMIN_EMAIL || 'admin@daniel-one-four.com',
       subject: `Payment Received - ${eventTitle}`,

@@ -27,11 +27,28 @@ export interface PaginatedResponse<T> {
   limit: number;
 }
 
-// Initialize the Contentful client
-const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID!,
-  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!,
-});
+// Replace module-level client initialization with a singleton lazy getter
+let contentfulClient: any = null;
+
+function getClient() {
+  if (!contentfulClient) {
+    const spaceId = process.env.CONTENTFUL_SPACE_ID;
+    const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
+    
+    if (!spaceId || !accessToken) {
+      console.error('Contentful environment variables missing in contentful-programs.ts');
+      return {
+        getEntries: () => Promise.resolve({ items: [], total: 0, skip: 0, limit: 0 })
+      } as any;
+    }
+
+    contentfulClient = createClient({
+      space: spaceId,
+      accessToken: accessToken,
+    });
+  }
+  return contentfulClient;
+}
 
 /**
  * Fetch all programs with optional pagination
@@ -39,7 +56,7 @@ const client = createClient({
 export async function getAllPrograms(page: number = 1, perPage: number = 10): Promise<PaginatedResponse<Program>> {
   try {
     const skip = (page - 1) * perPage;
-    const response = await client.getEntries({
+    const response = await getClient().getEntries({
       content_type: 'program',
       order: ['fields.order', 'fields.title'],
       skip,
@@ -63,7 +80,7 @@ export async function getAllPrograms(page: number = 1, perPage: number = 10): Pr
  */
 export async function getProgramBySlug(slug: string): Promise<Program | null> {
   try {
-    const response = await client.getEntries({
+    const response = await getClient().getEntries({
       content_type: 'program',
       'fields.slug': slug,
       limit: 1,
@@ -99,7 +116,6 @@ export async function getFeaturedPrograms(page: number = 1, perPage: number = 3)
     };
   } catch (error) {
     console.error('Error fetching featured programs from Contentful:', error);
-    throw error;
   }
 }
 

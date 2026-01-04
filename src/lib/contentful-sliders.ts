@@ -12,11 +12,29 @@ export interface Slide {
   active: boolean;
 }
 
-// Create Contentful client
-const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID || '',
-  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || '',
-});
+// Replace module-level client initialization with a singleton lazy getter
+let contentfulClient: any = null;
+
+function getClient() {
+  if (!contentfulClient) {
+    const spaceId = process.env.CONTENTFUL_SPACE_ID;
+    const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
+    
+    if (!spaceId || !accessToken) {
+      console.error('Contentful environment variables missing in contentful-sliders.ts');
+      return {
+        getEntries: () => Promise.resolve({ items: [], total: 0, skip: 0, limit: 0 }),
+        getEntry: () => Promise.resolve(null)
+      } as any;
+    }
+
+    contentfulClient = createClient({
+      space: spaceId,
+      accessToken: accessToken,
+    });
+  }
+  return contentfulClient;
+}
 
 // Map Contentful response to Slide objects
 function mapContentfulSlides(entries: any): Slide[] {
@@ -44,7 +62,7 @@ function mapContentfulSlides(entries: any): Slide[] {
 // Get all slides
 export async function getAllSlides(): Promise<Slide[]> {
   try {
-    const response = await client.getEntries({
+    const response = await getClient().getEntries({
       content_type: 'slider',
       order: 'fields.order',
     });
@@ -59,7 +77,7 @@ export async function getAllSlides(): Promise<Slide[]> {
 // Get active slides only
 export async function getActiveSlides(): Promise<Slide[]> {
   try {
-    const response = await client.getEntries({
+    const response = await getClient().getEntries({
       content_type: 'slider',
       'fields.active': true,
       order: 'fields.order',
@@ -75,7 +93,7 @@ export async function getActiveSlides(): Promise<Slide[]> {
 // Get a specific slide by ID
 export async function getSlideById(id: string): Promise<Slide | null> {
   try {
-    const response = await client.getEntry(id);
+    const response = await getClient().getEntry(id);
     
     if (!response) return null;
     

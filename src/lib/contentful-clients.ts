@@ -10,11 +10,29 @@ export interface Client {
   order: number;
 }
 
-// Create Contentful client
-const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID || '',
-  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || '',
-});
+// Replace module-level client initialization with a singleton lazy getter
+let contentfulClient: any = null;
+
+function getClient() {
+  if (!contentfulClient) {
+    const spaceId = process.env.CONTENTFUL_SPACE_ID;
+    const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
+    
+    if (!spaceId || !accessToken) {
+      console.error('Contentful environment variables missing in contentful-clients.ts');
+      return {
+        getEntries: () => Promise.resolve({ items: [], total: 0, skip: 0, limit: 0 }),
+        getEntry: () => Promise.resolve(null)
+      } as any;
+    }
+
+    contentfulClient = createClient({
+      space: spaceId,
+      accessToken: accessToken,
+    });
+  }
+  return contentfulClient;
+}
 
 // Map Contentful response to Client objects
 function mapContentfulClients(entries: any): Client[] {
@@ -40,7 +58,7 @@ function mapContentfulClients(entries: any): Client[] {
 // Get all clients
 export async function getAllClients(): Promise<Client[]> {
   try {
-    const response = await client.getEntries({
+    const response = await getClient().getEntries({
       content_type: 'client',
       order: 'fields.order',
     });
@@ -55,7 +73,7 @@ export async function getAllClients(): Promise<Client[]> {
 // Get featured clients
 export async function getFeaturedClients(): Promise<Client[]> {
   try {
-    const response = await client.getEntries({
+    const response = await getClient().getEntries({
       content_type: 'client',
       'fields.featured': true,
       order: 'fields.order',
@@ -71,7 +89,7 @@ export async function getFeaturedClients(): Promise<Client[]> {
 // Get specific client by ID
 export async function getClientById(id: string): Promise<Client | null> {
   try {
-    const response = await client.getEntry(id);
+    const response = await getClient().getEntry(id);
     
     if (!response) return null;
     
