@@ -1,115 +1,92 @@
 'use client';
-import React, { useState } from 'react';
-import Image from 'next/image';
-import HoleButton from '@/components/ui/HoleButton';
-import coachingImage from '@/assets/images/coaching.png';
-import { useAllServices } from '@/hooks/use-contentful';
-import { Service } from '@/lib/contentful';
-import { FiAlertTriangle, FiStar, FiHeart, FiCoffee, FiZap } from 'react-icons/fi';
-import Link from 'next/link';
 
-interface ServicesProps {
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Service } from '@/lib/contentful';
+
+interface ServicesSectionProps {
   initialServices?: Service[];
 }
 
-const icons = [FiStar, FiHeart, FiCoffee, FiZap];
-
-const GenZCoachingSection = ({ initialServices }: ServicesProps) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const { data: servicesData = [], isLoading, error, refetch } = useAllServices({
-    initialData: initialServices,
-    enabled: !initialServices,
-  });
-
-  const services = servicesData || initialServices || [];
-
-  if (isLoading && !initialServices) {
-    return (
-      <section className="bg-gradient-to-r from-pink-50 via-purple-50 to-blue-50 py-20 text-center">
-        <h2 className="text-4xl font-extrabold text-purple-700 mb-8">Loading the Fun...</h2>
-      </section>
-    );
-  }
-
-  if ((error || services.length === 0) && !initialServices) {
-    return (
-      <section className="bg-red-50 py-20 text-center">
-        <FiAlertTriangle className="text-red-500 h-12 w-12 mx-auto mb-4" />
-        <h3 className="text-2xl font-bold text-red-600 mb-4">Oops! No services loaded</h3>
-        <button
-          onClick={() => refetch()}
-          className="bg-pink-500 text-white px-6 py-3 rounded-full hover:scale-105 transition-transform"
-        >
-          Try Again
-        </button>
-        <Link href="/services" className="block mt-4 text-purple-600 font-bold hover:underline">
-          Browse All Services
-        </Link>
-      </section>
-    );
-  }
-
+const ServicesSection = ({ initialServices = [] }: ServicesSectionProps) => {
   return (
-    <section className="pt-16 pb-8 md:pt-20 md:pb-20 lg:pt-32 bg-brand-yellow">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-12" data-aos="fade-up">
-          <p className="text-sm font-semibold uppercase text-pink-500 mb-2 tracking-wide">What We Do</p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-zinc-800 mb-2">Learn and Grow With Us!</h2>
-          <p className="text-gray-700 max-w-xl mx-auto">Fun ways to learn new skills.</p>
+    <section className="py-24 bg-zinc-50 overflow-hidden" id="services">
+      <div className="container mx-auto px-6">
+        <div className="text-center max-w-3xl mx-auto mb-20 space-y-4" data-aos="fade-up">
+          <span className="inline-block px-4 py-1.5 bg-brand-orange/10 text-brand-orange font-bold text-xs tracking-widest uppercase rounded-full">
+            Our Expertise
+          </span>
+          <h2 className="text-4xl md:text-6xl font-black text-slate-900 leading-tight">
+            How We <span className="text-brand-blue">Empower</span> You
+          </h2>
+          <p className="text-slate-600 text-lg">
+            We provide specialized coaching, training, and consulting services designed to elevate your personal and professional impact.
+          </p>
         </div>
 
-        {/* Services Carousel */}
-        <div className="flex overflow-x-auto space-x-6 py-6 scrollbar-hide">
-          {services.map((service, index) => {
-            const Icon = icons[index % icons.length];
-            return (
-              <div
-                key={index}
-                onClick={() => setActiveIndex(index)}
-                className={`flex-shrink-0 w-72 md:w-80 p-6 rounded-2xl shadow-lg cursor-pointer transform transition duration-300 hover:scale-105 ${activeIndex === index ? 'bg-orange-100 shadow-2xl' : 'bg-white'
-                  }`}
-                data-aos="fade-up"
-                data-aos-delay={`${index * 100}`}
-              >
-                <div className="text-3xl text-orange-500 mb-3">
-                  <Icon />
-                </div>
-                <h3 className="font-bold text-xl text-zinc-800 mb-2">{service.title}</h3>
-                <p className="text-gray-600 mb-4 line-clamp-3">{service.description}</p>
-                <HoleButton
-                  href={`/services/${service.slug}`}
-                  bgColorClass="bg-pink-500 hover:bg-pink-600 text-white"
-                >
-                  <span>Peep This! <br /></span>
-                </HoleButton>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {initialServices.map((service, index) => (
+            <div 
+              key={service.id || service.slug} 
+              className="group bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:border-brand-blue/20 transition-all duration-500 flex flex-col h-full"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+            >
+              <div className="relative h-48 w-full rounded-2xl overflow-hidden mb-8">
+                {service.featuredImage ? (
+                  <Image
+                    src={service.featuredImage}
+                    alt={service.title}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-brand-blue/5 flex items-center justify-center text-brand-blue/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
-            );
-          })}
+
+              <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-brand-blue transition-colors">
+                {service.title}
+              </h3>
+              
+              <p className="text-slate-600 mb-8 line-clamp-3 flex-grow">
+                {service.description}
+              </p>
+
+              <div className="pt-4 border-t border-slate-50 mt-auto">
+                <Link 
+                  href={`/services/${service.slug}`}
+                  className="inline-flex items-center gap-2 text-brand-blue font-bold hover:gap-3 transition-all duration-300"
+                >
+                  Explore Service
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* Featured Service Image */}
-        {services[activeIndex] && (
-          <div
-            className="relative mt-12 rounded-3xl overflow-hidden shadow-2xl group"
-            data-aos="zoom-in"
-          >
-            <Image
-              src={coachingImage}
-              alt={services[activeIndex].title}
-              className="h-80 md:h-[400px] w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              fill
-              style={{ objectFit: 'cover' }}
-            />
-            <div className="absolute bottom-0 left-0 bg-white p-6 rounded-tr-2xl shadow-lg max-w-xs md:max-w-sm">
-              <h3 className="font-bold text-xl text-purple-800">{services[activeIndex].title}</h3>
-              <p className="text-gray-700 text-sm line-clamp-2">{services[activeIndex].description}</p>
-            </div>
+        {initialServices.length === 0 && (
+          <div className="text-center py-20 bg-white rounded-3xl border-2 border-dashed border-slate-200">
+            <p className="text-slate-400">No services found. Please check back later.</p>
           </div>
         )}
+        
+        <div className="mt-20 text-center" data-aos="zoom-in">
+          <Link 
+            href="/services"
+            className="inline-flex items-center gap-2 border-2 border-slate-900 text-slate-900 font-bold px-10 py-4 rounded-full hover:bg-slate-900 hover:text-white transition-all duration-300"
+          >
+            View All Services
+          </Link>
+        </div>
       </div>
     </section>
   );
 };
 
-export default GenZCoachingSection;
+export default ServicesSection;
