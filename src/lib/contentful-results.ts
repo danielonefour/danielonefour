@@ -9,11 +9,29 @@ export interface Result {
   order: number;
 }
 
-// Create Contentful client
-const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID || '',
-  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || '',
-});
+// Replace module-level client initialization with a singleton lazy getter
+let contentfulClient: any = null;
+
+function getClient() {
+  if (!contentfulClient) {
+    const spaceId = process.env.CONTENTFUL_SPACE_ID;
+    const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
+    
+    if (!spaceId || !accessToken) {
+      console.error('Contentful environment variables missing in contentful-results.ts');
+      return {
+        getEntries: () => Promise.resolve({ items: [], total: 0, skip: 0, limit: 0 }),
+        getEntry: () => Promise.resolve(null)
+      } as any;
+    }
+
+    contentfulClient = createClient({
+      space: spaceId,
+      accessToken: accessToken,
+    });
+  }
+  return contentfulClient;
+}
 
 // Map Contentful response to Result objects
 function mapContentfulResults(entries: any): Result[] {
@@ -35,7 +53,7 @@ function mapContentfulResults(entries: any): Result[] {
 // Get all results
 export async function getAllResults(): Promise<Result[]> {
   try {
-    const response = await client.getEntries({
+    const response = await getClient().getEntries({
       content_type: 'result',
       order: 'fields.order',
     });
@@ -50,7 +68,7 @@ export async function getAllResults(): Promise<Result[]> {
 // Get specific result by ID
 export async function getResultById(id: string): Promise<Result | null> {
   try {
-    const response = await client.getEntry(id);
+    const response = await getClient().getEntry(id);
     
     if (!response) return null;
     

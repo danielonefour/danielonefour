@@ -26,11 +26,29 @@ export interface EventsResponse {
   limit: number;
 }
 
-// Create Contentful client
-const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID || '',
-  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || '',
-});
+// Replace module-level client initialization with a singleton lazy getter
+let contentfulClient: any = null;
+
+function getClient() {
+  if (!contentfulClient) {
+    const spaceId = process.env.CONTENTFUL_SPACE_ID;
+    const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
+    
+    if (!spaceId || !accessToken) {
+      console.error('Contentful environment variables missing');
+      // Return a mock if in development to avoid crashes, but at build time we must avoid throwing if possible or handle it
+      return {
+        getEntries: () => Promise.resolve({ items: [], total: 0, skip: 0, limit: 0 })
+      } as any;
+    }
+
+    contentfulClient = createClient({
+      space: spaceId,
+      accessToken: accessToken,
+    });
+  }
+  return contentfulClient;
+}
 
 // Map Contentful response to Event objects
 function mapContentfulEvents(entries: any): Event[] {
@@ -71,7 +89,7 @@ export async function getAllEvents(
   const skip = (page - 1) * perPage;
   
   try {
-    const response = await client.getEntries({
+    const response = await getClient().getEntries({
       content_type: 'event',
       order: 'fields.date',
       limit: perPage,
@@ -95,7 +113,7 @@ export async function getUpcomingEvents(count: number = 3): Promise<Event[]> {
   const now = new Date().toISOString();
   
   try {
-    const response = await client.getEntries({
+    const response = await getClient().getEntries({
       content_type: 'event',
       // Order by date ascending to get the closest upcoming events first
       order: 'fields.date',
@@ -120,7 +138,7 @@ export async function getUpcomingEvents(count: number = 3): Promise<Event[]> {
 // Get featured events
 export async function getFeaturedEvents(count: number = 3): Promise<Event[]> {
   try {
-    const response = await client.getEntries({
+    const response = await getClient().getEntries({
       content_type: 'event',
       order: 'fields.date',
       limit: count,
@@ -137,7 +155,7 @@ export async function getFeaturedEvents(count: number = 3): Promise<Event[]> {
 // Get event by slug
 export async function getEventBySlug(slug: string): Promise<Event | null> {
   try {
-    const response = await client.getEntries({
+    const response = await getClient().getEntries({
       content_type: 'event',
       'fields.slug': slug,
       limit: 1,

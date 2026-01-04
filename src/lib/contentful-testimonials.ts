@@ -11,11 +11,29 @@ export interface Testimonial {
   featured: boolean;
 }
 
-// Create Contentful client
-const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID || '',
-  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || '',
-});
+// Replace module-level client initialization with a singleton lazy getter
+let contentfulClient: any = null;
+
+function getClient() {
+  if (!contentfulClient) {
+    const spaceId = process.env.CONTENTFUL_SPACE_ID;
+    const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
+    
+    if (!spaceId || !accessToken) {
+      console.error('Contentful environment variables missing in contentful-testimonials.ts');
+      return {
+        getEntries: () => Promise.resolve({ items: [], total: 0, skip: 0, limit: 0 }),
+        getEntry: () => Promise.resolve(null)
+      } as any;
+    }
+
+    contentfulClient = createClient({
+      space: spaceId,
+      accessToken: accessToken,
+    });
+  }
+  return contentfulClient;
+}
 
 // Map Contentful response to Testimonial objects
 function mapContentfulTestimonials(entries: any): Testimonial[] {
@@ -42,7 +60,7 @@ function mapContentfulTestimonials(entries: any): Testimonial[] {
 // Get all testimonials
 export async function getAllTestimonials(): Promise<Testimonial[]> {
   try {
-    const response = await client.getEntries({
+    const response = await getClient().getEntries({
       content_type: 'testimonial',
       order: '-sys.createdAt',
     });
@@ -57,7 +75,7 @@ export async function getAllTestimonials(): Promise<Testimonial[]> {
 // Get featured testimonials
 export async function getFeaturedTestimonials(count: number = 3): Promise<Testimonial[]> {
   try {
-    const response = await client.getEntries({
+    const response = await getClient().getEntries({
       content_type: 'testimonial',
       'fields.featured': true,
       order: '-sys.createdAt',
@@ -74,7 +92,7 @@ export async function getFeaturedTestimonials(count: number = 3): Promise<Testim
 // Get testimonial by ID
 export async function getTestimonialById(id: string): Promise<Testimonial | null> {
   try {
-    const response = await client.getEntry(id);
+    const response = await getClient().getEntry(id);
     
     if (!response) return null;
     
