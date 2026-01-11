@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { FaCrown } from "react-icons/fa";
 
 export default function HeroSection() {
   const stats = [
@@ -20,7 +21,7 @@ export default function HeroSection() {
           <header className="space-y-6">
 
             <div className="flex items-center space-x-3 text-zinc-200 mt-5">
-              <Crown className="h-7 w-7" />
+              <FaCrown className="h-7 w-7" />
               <span className="text-sm font-bold tracking-widest uppercase zinc-700">
                 School Of Leadership & Etiquette
               </span>
