@@ -94,7 +94,7 @@ You will not have to pay a fee to access your personal data (or to exercise any 
         />
         
         <section className="py-16 md:py-24">
-          <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="max-w-4xl mx-auto">
               {/* Render the policy content using dangerouslySetInnerHTML */}
               <div 

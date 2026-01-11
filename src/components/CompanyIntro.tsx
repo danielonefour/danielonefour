@@ -7,7 +7,7 @@ export default function CompanyIntro() {
   if (isLoading || !companyDetails) {
     return (
       <div className="bg-white py-12">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="h-8 w-40 bg-gray-300 animate-pulse rounded mb-6"></div>
             <div className="space-y-3">
@@ -23,7 +23,7 @@ export default function CompanyIntro() {
 
   return (
     <div className="bg-white py-16 md:py-24">
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-6">
             {companyDetails.introTitle}

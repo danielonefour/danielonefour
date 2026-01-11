@@ -81,7 +81,7 @@ const Footer = () => {
   };
   return (
     <footer className="bg-black border-t border-gray-200 py-12">
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between pb-8 border-b border-gray-200">
           <div className="w-full md:w-1/3 mb-8 md:mb-0">
             <Link href="/" prefetch>

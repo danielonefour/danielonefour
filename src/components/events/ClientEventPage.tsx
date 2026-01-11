@@ -98,7 +98,7 @@ export default function ClientEventPage({ slug, initialEvent }: ClientEventPageP
       <>
         <Header />
         <main>
-          <div className="container mx-auto px-4 py-16 flex justify-center">
+          <div className="max-w-7xl mx-auto px-4 py-16 flex justify-center">
             <div className="text-center">
               <Oval
                 height={60}
@@ -123,7 +123,7 @@ export default function ClientEventPage({ slug, initialEvent }: ClientEventPageP
       <>
         <Header />
         <main>
-          <div className="container mx-auto px-4 py-16">
+          <div className="max-w-7xl mx-auto px-4 py-16">
             <div className="bg-red-50 border border-red-200 p-6 rounded-lg text-center">
               <h2 className="text-xl font-bold text-red-700 mb-2">Error</h2>
               <p className="text-red-600">{error}</p>
@@ -157,7 +157,7 @@ export default function ClientEventPage({ slug, initialEvent }: ClientEventPageP
           breadcrumbs={breadcrumbs}
         />
         
-        <div className="container mx-auto px-4 py-16">
+        <div className="max-w-7xl mx-auto px-4 py-16">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Event Details - takes up 2/3 on desktop */}
             <div className="lg:col-span-2">

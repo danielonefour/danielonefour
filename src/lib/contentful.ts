@@ -556,17 +556,16 @@ function mapContentfulBlogPosts(data: any): BlogPost[] {
 // Function to get all services
 export async function getAllServices(): Promise<Service[]> {
   try {
-    const response = await fetch(
-      `https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/${process.env.CONTENTFUL_ENVIRONMENT}/entries?content_type=service&order=fields.order&access_token=${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-      { next: { revalidate: 60 } }
-    );
+    const entries = await getClient().getEntries({
+      content_type: 'service',
+      order: 'fields.order',
+    });
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch services: ${response.status}`);
+    if (!entries.items || entries.items.length === 0) {
+      return [];
     }
 
-    const data = await response.json();
-    return mapContentfulServices(data);
+    return mapSdkServices(entries.items);
   } catch (error) {
     console.error('Error fetching services:', error);
     throw error;
@@ -576,18 +575,17 @@ export async function getAllServices(): Promise<Service[]> {
 // Function to get a service by slug
 export async function getServiceBySlug(slug: string): Promise<Service | null> {
   try {
-    const response = await fetch(
-      `https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/${process.env.CONTENTFUL_ENVIRONMENT}/entries?content_type=service&fields.slug=${slug}&access_token=${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-      { next: { revalidate: 60 } }
-    );
+    const entries = await getClient().getEntries({
+      content_type: 'service',
+      'fields.slug': slug,
+      limit: 1,
+    });
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch service: ${response.status}`);
+    if (!entries.items || entries.items.length === 0) {
+      return null;
     }
 
-    const data = await response.json();
-    const services = mapContentfulServices(data);
-    
+    const services = mapSdkServices(entries.items);
     return services.length > 0 ? services[0] : null;
   } catch (error) {
     console.error(`Error fetching service with slug ${slug}:`, error);
@@ -598,49 +596,43 @@ export async function getServiceBySlug(slug: string): Promise<Service | null> {
 // Function to get featured services
 export async function getFeaturedServices(): Promise<Service[]> {
   try {
-    const response = await fetch(
-      `https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/${process.env.CONTENTFUL_ENVIRONMENT}/entries?content_type=service&fields.featured=true&order=fields.order&access_token=${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-      { next: { revalidate: 60 } }
-    );
+    const entries = await getClient().getEntries({
+      content_type: 'service',
+      'fields.featured': true,
+      order: 'fields.order',
+    });
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch featured services: ${response.status}`);
+    if (!entries.items || entries.items.length === 0) {
+      return [];
     }
 
-    const data = await response.json();
-    return mapContentfulServices(data);
+    return mapSdkServices(entries.items);
   } catch (error) {
     console.error('Error fetching featured services:', error);
     throw error;
   }
 }
 
-// Helper function to map Contentful response to Service objects
-function mapContentfulServices(data: any): Service[] {
-  if (!data.items || data.items.length === 0) {
-    return [];
-  }
-
-  return data.items.map((item: any) => {
-    // Find the featured image if it exists
+// Helper function to map SDK response items to Service objects
+function mapSdkServices(items: any[]): Service[] {
+  return items.map((item: any) => {
+    const fields = item.fields;
+    
+    // Get the featured image URL if it exists (SDK resolves links)
     let featuredImageUrl;
-    if (item.fields.featuredImage) {
-      const imageId = item.fields.featuredImage.sys.id;
-      const asset = data.includes?.Asset?.find((a: any) => a.sys.id === imageId);
-      if (asset) {
-        featuredImageUrl = asset.fields.file.url;
-        // Add https: if the URL starts with //
-        if (featuredImageUrl.startsWith('//')) {
-          featuredImageUrl = `https:${featuredImageUrl}`;
-        }
+    if (fields.featuredImage?.fields?.file?.url) {
+      featuredImageUrl = fields.featuredImage.fields.file.url;
+      // Add https: if the URL starts with //
+      if (featuredImageUrl.startsWith('//')) {
+        featuredImageUrl = `https:${featuredImageUrl}`;
       }
     }
 
     // Parse FAQs from JSON string
     let faqs = [];
     try {
-      if (item.fields.faqsJson) {
-        faqs = JSON.parse(item.fields.faqsJson);
+      if (fields.faqsJson) {
+        faqs = JSON.parse(fields.faqsJson);
       }
     } catch (error) {
       console.error('Error parsing FAQs JSON:', error);
@@ -648,15 +640,18 @@ function mapContentfulServices(data: any): Service[] {
 
     return {
       id: item.sys.id,
-      title: item.fields.title,
-      slug: item.fields.slug,
-      description: item.fields.description,
-      content: item.fields.content,
+      title: fields.title || '',
+      slug: fields.slug || '',
+      description: fields.description || '',
+      content: fields.content || '',
       featuredImage: featuredImageUrl,
-      benefits: item.fields.benefits || [],
+      benefits: fields.benefits || [],
       faqs: faqs,
-      order: item.fields.order || 999,
-      featured: !!item.fields.featured
+      order: fields.order || 999,
+      featured: !!fields.featured
     };
   });
-} 
+}
+
+// Helper function to map Contentful response to Service objects
+ 

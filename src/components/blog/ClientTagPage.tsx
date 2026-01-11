@@ -114,7 +114,7 @@ export default function ClientTagPage({
   if (!initialPosts || initialPosts.length === 0) {
     return (
       <section className="py-16">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <EmptyState tagName={tagName} />
         </div>
       </section>
@@ -123,7 +123,7 @@ export default function ClientTagPage({
 
   return (
     <section className="py-16">
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Blog Posts Grid - Takes 3/4 of the space */}
           <div className="lg:col-span-3">

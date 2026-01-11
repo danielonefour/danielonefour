@@ -6,14 +6,14 @@ export default function EventPageLoading() {
       {/* PageHeader Skeleton */}
       <div className="h-[300px] md:h-[400px] bg-gray-300 relative">
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40"></div>
-        <div className="container mx-auto px-4 h-full flex items-center relative z-10">
+        <div className="max-w-7xl mx-auto px-4 h-full flex items-center relative z-10">
           <div className="max-w-3xl">
             <div className="h-12 w-3/4 bg-gray-400 animate-pulse rounded"></div>
           </div>
         </div>
       </div>
       
-      <div className="container mx-auto px-4 py-16">
+      <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Event Details Skeleton */}
           <div className="lg:col-span-2">

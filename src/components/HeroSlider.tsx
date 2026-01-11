@@ -70,7 +70,7 @@ export default function HeroSlider() {
           
           {/* Content */}
           <div className="relative z-20 h-full flex items-center">
-            <div className="container mx-auto px-4">
+            <div className="max-w-7xl mx-auto px-4">
               <div className="max-w-3xl">
                 <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
                   {slide.title}

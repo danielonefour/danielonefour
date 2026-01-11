@@ -7,7 +7,7 @@ import Link from 'next/link';
 const AboutMeSection = () => {
   return (
     <section id="about-me" className="py-20 bg-white overflow-hidden">
-      <div className="container mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           {/* Image Side - 3 Image Collage */}
           <div className="w-full lg:w-1/2 relative min-h-[500px] flex items-center justify-center" data-aos="fade-right">
@@ -19,6 +19,7 @@ const AboutMeSection = () => {
                 fill
                 className="object-cover object-top"
                 priority
+                sizes="(max-width: 1024px) 100vw, 33vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/20 to-transparent"></div>
             </div>
@@ -29,6 +30,7 @@ const AboutMeSection = () => {
                 src="/images/author/portrait-white.png" 
                 alt="Oyinkansola Adedapo White"
                 fill
+                sizes="(max-width: 1024px) 50vw, 25vw"
                 className="object-cover"
               />
             </div>
@@ -39,6 +41,7 @@ const AboutMeSection = () => {
                 src="/images/author/leader-chess.jpg" 
                 alt="Leadership"
                 fill
+                sizes="(max-width: 1024px) 50vw, 25vw"
                 className="object-cover"
               />
             </div>

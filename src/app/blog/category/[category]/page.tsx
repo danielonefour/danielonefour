@@ -18,6 +18,13 @@ interface CategoryPageProps {
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const { category } = await params;
   
+  if (!category) {
+    return {
+      title: 'Category Not Found | Daniel One Four Coaching',
+      description: 'The requested blog category could not be found.',
+    };
+  }
+  
   // Format the category name for display
   const categoryTitle = category
     .replace(/-/g, ' ')
@@ -34,6 +41,12 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
   const { category } = await params;
   const awaitedSearchParams = await searchParams;
+  
+  if (!category) {
+    console.error('Category parameter is missing in CategoryPage');
+    return notFound();
+  }
+  
   const pageParam = awaitedSearchParams?.page;
   const currentPage = pageParam 
     ? parseInt(Array.isArray(pageParam) ? pageParam[0] : pageParam) 
@@ -79,8 +92,9 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
         <main>
           <PageHeader 
             title={`${categoryTitle} Articles`}
-            image={aboutImage}
+            image="/images/author/leader-chess.jpg"
             breadcrumbs={breadcrumbs}
+            titleClassName="text-3xl md:text-5xl lg:text-6xl"
           />
           
           <ClientCategoryPage 

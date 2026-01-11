@@ -4,12 +4,12 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import PageHeader from '@/components/layout/PageHeader';
 import TeamSection from '@/components/about/TeamSection';
-import aboutImage from '@/assets/images/about.png';
+
 
 // Loading component for the TeamSection
 const TeamSectionLoading = () => (
   <section className="py-16 md:py-24 bg-light-gray">
-    <div className="container mx-auto px-6">
+    <div className="max-w-7xl mx-auto px-6">
       <div className="text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-bold animate-pulse">Our Expert Team</h2>
         <div className="h-4 bg-gray-300 rounded max-w-3xl mx-auto mt-4 animate-pulse"></div>
@@ -39,13 +39,13 @@ const AboutPage = () => {
       <main className="bg-white">
         <PageHeader 
           title="Our Story" 
-          image={aboutImage}
+          image="/images/author/leader-chess.jpg"
           breadcrumbs={breadcrumbs}
         />
         
         {/* The Visionary Section */}
         <section className="py-24 relative overflow-hidden">
-          <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-20 items-center">
               <div className="relative" data-aos="fade-right">
                 <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl">
@@ -89,7 +89,7 @@ const AboutPage = () => {
 
         {/* Impact Section */}
         <section className="py-24 bg-brand-orange text-white overflow-hidden">
-          <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="order-2 lg:order-1 space-y-8" data-aos="fade-right">
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight">
@@ -115,7 +115,19 @@ const AboutPage = () => {
                 </div>
               </div>
 
-            
+              <div className="order-1 lg:order-2 relative" data-aos="fade-left">
+                <div className="relative aspect-square rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white/20">
+                  <Image
+                    src="/images/author/global-team.jpg"
+                    alt="Global Interaction Team"
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+                </div>
+                 {/* Decorative element */}
+                 <div className="absolute -top-10 -right-10 w-40 h-40 bg-white rounded-full -z-10 blur-2xl opacity-30"></div>
+              </div>
             </div>
           </div>
         </section>
@@ -124,11 +136,11 @@ const AboutPage = () => {
 
         {/* Connect Section */}
         <section className="py-24 text-center">
-          <div className="container mx-auto px-6 max-w-4xl space-y-8" data-aos="fade-up">
+          <div className="max-w-7xl mx-auto px-6 space-y-8" data-aos="fade-up">
             <h2 className="text-4xl md:text-5xl font-black text-slate-900">
               Join Our <span className="text-brand-orange">Growth</span> Community
             </h2>
-            <p className="text-lg text-slate-600 leading-relaxed">
+            <p className="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
               We invite you to connect with us on social media, where we share valuable insights and resources tailored to your growth. Join our community of like-minded individuals dedicated to unlocking their leadership potential.
             </p>
             <div className="pt-4">

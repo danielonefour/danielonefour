@@ -17,7 +17,7 @@ export default function CompanyHero() {
 
   return (
     <div className="bg-gradient-to-r from-blue-900 to-indigo-800 text-white">
-      <div className="container mx-auto px-4 py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-3xl md:text-5xl font-bold mb-6">
             {companyDetails.heroTitle}

@@ -55,6 +55,13 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ tag: string }> }): Promise<Metadata> {
   const { tag } = await params;
   
+  if (!tag) {
+    return {
+      title: 'Tag Not Found | Daniel One Four Blog',
+      description: 'The requested blog tag could not be found.',
+    };
+  }
+  
   // Format the tag name for display
   const tagName = tag
     .replace(/-/g, ' ')
@@ -72,6 +79,11 @@ export async function generateMetadata({ params }: { params: Promise<{ tag: stri
 export default async function TagPage({ params }: { params: Promise<{ tag: string }> }) {
   try {
     const { tag: tagSlug } = await params;
+    
+    if (!tagSlug) {
+      console.error('Tag parameter is missing in TagPage');
+      return notFound();
+    }
     
     // Format tag name from slug
     const tagName = tagSlug

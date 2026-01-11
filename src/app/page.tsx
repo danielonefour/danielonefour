@@ -68,7 +68,6 @@ export default async function Home() {
         <HeroSection />
         <InfiniteScroll />
         
-        <AboutMeSection />
 
         <ClientsSection />
 
@@ -78,6 +77,8 @@ export default async function Home() {
 
         <TestimonialsSection />
         <BlogSection initialPosts={initialPosts} />
+                <InfiniteScroll />
+
       </main>
       <Footer />
     </>

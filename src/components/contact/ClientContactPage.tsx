@@ -5,16 +5,11 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import PageHeader from '@/components/layout/PageHeader';
 import { FiMail, FiPhone, FiSend, FiLoader, FiCheckCircle } from 'react-icons/fi';
-import aboutImage from '@/assets/images/about.png';
 import { FiMapPin, FiClock } from 'react-icons/fi';
 
 import { useCompanyDetails } from '@/hooks/useCompanyDetails';
 
 const ClientContactPage = () => {
-  const breadcrumbs = [
-    { label: 'Home', href: '/' },
-    { label: 'Contact', href: '/contact' },
-  ];
   const { data: companyDetails, isLoading } = useCompanyDetails();
 
   // Form state
@@ -32,7 +27,7 @@ const ClientContactPage = () => {
   const [success, setSuccess] = useState(false);
 
   // Handle input change
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -96,206 +91,234 @@ const ClientContactPage = () => {
   return (
     <>
       <Header />
-<main className="mt-12 md:mt-20">
-        <section className="py-16 md:py-24">
-          <div className="container mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-              {/* Contact Form & Image Section */}
-              <div className="bg-[#f6f6f6] p-6 md:p-10 rounded-3xl shadow-lg border border-gray-200">
-                <div className="flex flex-col gap-8">
-                  <div className="space-y-2">
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-                      Have Questions? 
-                    </h2>
-                    <p className="text-gray-600 text-sm">
-                      Fill out the form below, and one of our team members will get back to you shortly. Reach out for any inquiries.
-                    </p>
-                  </div>
-                  <form onSubmit={handleSubmit} className="space-y-6" id="contact-form">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label htmlFor="name" className="block text-gray-700 text-sm mb-1">First Name</label>
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          className="w-full p-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a5b4a]"
-                      placeholder="Your first name"
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="lastName" className="block text-gray-700 text-sm mb-1">Last Name</label>
-                        <input
-                          type="text"
-                          id="lastName"
-                          name="lastName"
-                          className="w-full p-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a5b4a]"
-                      placeholder="Your last name"
-                        />
-                      </div>
-                    </div>
+      <main className="min-h-screen bg-neutral-50 pt-36 pb-16 md:pt-48 md:pb-24">
+        <section className="container max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4" data-aos="fade-up">
+            <span className="inline-block px-4 py-1.5 bg-brand-orange/10 text-brand-orange font-bold text-xs tracking-widest uppercase rounded-full">
+              Get in Touch
+            </span>
+            <h1 className="text-4xl md:text-5xl font-black text-slate-900 leading-tight">
+              We'd Love to <br className="md:hidden" /> <span className="text-brand-blue">Hear From You</span>
+            </h1>
+            <p className="text-slate-600 text-lg md:text-xl">
+              Have a question about our courses or services? Fill out the form below and our team will get back to you shortly.
+            </p>
+          </div>
 
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            {/* Contact Information & Sidebar */}
+            <div className="lg:col-span-4 space-y-6" data-aos="fade-right">
+              {/* Info Card */}
+              <div className="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 overflow-hidden relative">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-brand-lightBlue/30 rounded-bl-[100px] -mr-8 -mt-8"></div>
+                
+                <h3 className="text-2xl font-bold text-slate-900 mb-6 relative z-10">Contact Info</h3>
+                
+                <div className="space-y-6 relative z-10">
+                  <div className="flex items-start gap-4 group">
+                    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-brand-lightBlue rounded-2xl group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
+                      <FiMail className="text-brand-blue text-xl group-hover:text-white transition-colors" />
+                    </div>
                     <div>
-                      <label htmlFor="email" className="block text-gray-700 text-sm mb-1">E-mail</label>
+                      <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Email</h4>
+                      <a href="mailto:danielonefour14@gmail.com" className="text-slate-800 font-medium hover:text-brand-blue transition-colors">
+                        danielonefour14@gmail.com
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4 group">
+                    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-brand-lightBlue rounded-2xl group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
+                      <FiPhone className="text-brand-blue text-xl group-hover:text-white transition-colors" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Phone</h4>
+                      <a href="tel:+31612671297" className="text-slate-800 font-medium hover:text-brand-blue transition-colors">
+                        +31 6 1267 1297
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4 group">
+                    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-brand-lightBlue rounded-2xl group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
+                      <FiMapPin className="text-brand-blue text-xl group-hover:text-white transition-colors" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Office</h4>
+                      <p className="text-slate-800 font-medium">
+                        Lagos, Nigeria
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4 group">
+                    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-brand-lightBlue rounded-2xl group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
+                      <FiClock className="text-brand-blue text-xl group-hover:text-white transition-colors" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Working Hours</h4>
+                      <p className="text-slate-800 font-medium">
+                        Mon-Fri: 9:00 AM - 6:00 PM
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+               {/* Optional: Add a small CTA or testimonial card here if desired */}
+               <div className="bg-brand-blue text-white p-8 rounded-3xl shadow-lg relative overflow-hidden">
+                  <div className="relative z-10">
+                    <h3 className="text-2xl font-bold mb-3">Not sure where to start?</h3>
+                    <p className="text-blue-50 mb-6">Explore our services to see how we can help you achieve your goals.</p>
+                    <a href="/services" className="inline-flex items-center gap-2 bg-white text-brand-blue px-6 py-3 rounded-xl font-bold hover:bg-brand-yellow hover:text-slate-900 transition-all">
+                      View Services
+                      <FiSend className="rotate-0" />
+                    </a>
+                  </div>
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-brand-orange/20 rounded-full -ml-10 -mb-10 blur-xl"></div>
+               </div>
+            </div>
+
+            {/* Contact Form */}
+            <div className="lg:col-span-8" data-aos="fade-left">
+              <div className="bg-white p-6 md:p-10 rounded-3xl shadow-xl border border-slate-100">
+                <form onSubmit={handleSubmit} className="space-y-6" id="contact-form">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                       <label htmlFor="name" className="text-sm font-bold text-slate-700 ml-1">First Name</label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/50 focus:border-brand-blue transition-all"
+                        placeholder="John"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                       <label htmlFor="lastName" className="text-sm font-bold text-slate-700 ml-1">Last Name</label>
+                      <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/50 focus:border-brand-blue transition-all"
+                        placeholder="Doe"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label htmlFor="email" className="text-sm font-bold text-slate-700 ml-1">Email Address</label>
                       <input
                         type="email"
                         id="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full p-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a5b4a]"
-                      placeholder="your.email@example.com"
+                        className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/50 focus:border-brand-blue transition-all"
+                        placeholder="john@example.com"
                         required
                       />
                     </div>
-                    <div>
-                      <label htmlFor="phone" className="block text-gray-700 text-sm mb-1">Phone Number</label>
+                    <div className="space-y-2">
+                      <label htmlFor="phone" className="text-sm font-bold text-slate-700 ml-1">Phone Number</label>
                       <input
                         type="tel"
                         id="phone"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="w-full p-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a5b4a]"
-                        placeholder="+234 800234756"
+                        className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/50 focus:border-brand-blue transition-all"
+                        placeholder="+234..."
                       />
                     </div>
-                    <div>
-                      <label htmlFor="subject" className="block text-gray-700 text-sm mb-1">Subject</label>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="subject" className="text-sm font-bold text-slate-700 ml-1">I'm interested in...</label>
+                    <div className="relative">
                       <select
                         id="subject"
                         name="subject"
                         value={formData.subject}
-                        onChange={(e) => handleChange(e as React.ChangeEvent<HTMLInputElement>)}
-                        className="w-full p-3 border border-gray-300 rounded-lg text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1a5b4a]"
+                        onChange={handleChange}
+                        className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-slate-600 focus:outline-none focus:ring-2 focus:ring-brand-blue/50 focus:border-brand-blue transition-all appearance-none cursor-pointer"
                         required
                       >
-                         <option value="" disabled>Select a service</option>
-                    <option value="pre-teen">Pre-teen Course</option>
-                    <option value="teens">Teens Course</option>
-                    <option value="youth">Youth Course</option>
-                    <option value="adult-one-on-one">Adult One-on-One</option>
-                    <option value="business-etiquette">Business Etiquette</option>
-                    <option value="family-package">Family Package</option>
-                    <option value="school-package">School Package</option>
-                    <option value="group-coaching">Group Coaching</option>
-                    <option value="workshops">Workshops/Training</option>
-                    <option value="speaking">Speaking Engagement</option>
+                        <option value="" disabled>Select a topic</option>
+                        <option value="pre-teen">Pre-teen Course</option>
+                        <option value="teens">Teens Course</option>
+                        <option value="youth">Youth Course</option>
+                        <option value="adult-one-on-one">Adult One-on-One</option>
+                        <option value="business-etiquette">Business Etiquette</option>
+                        <option value="family-package">Family Package</option>
+                        <option value="school-package">School Package</option>
+                        <option value="group-coaching">Group Coaching</option>
+                        <option value="workshops">Workshops/Training</option>
+                        <option value="speaking">Speaking Engagement</option>
+                        <option value="other">Other Inquiry</option>
                       </select>
-                    </div>
-
-                    <div>
-                      <label htmlFor="message" className="block text-gray-700 text-sm mb-1">Message</label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        rows={4}
-                        className="w-full p-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a5b4a]"
-                    placeholder="Tell us about your goals and how we can help you..."
-                        required
-                      ></textarea>
-                    </div>
-
-                    {error && (
-                      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg">
-                        {error}
+                      <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                       </div>
-                    )}
+                    </div>
+                  </div>
 
-                    {success && (
-                      <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg flex items-center">
-                        <FiCheckCircle className="mr-2 text-xl" />
-                        <div>
-                          <p className="font-medium">Message sent successfully!</p>
-                          <p className="text-sm">Thank you for reaching out. We'll get back to you as soon as possible.</p>
-                        </div>
+                  <div className="space-y-2">
+                    <label htmlFor="message" className="text-sm font-bold text-slate-700 ml-1">Your Message</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      rows={5}
+                      className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/50 focus:border-brand-blue transition-all resize-none"
+                      placeholder="Tell us a bit more about your needs..."
+                      required
+                    ></textarea>
+                  </div>
+
+                  {error && (
+                    <div className="bg-red-50 border border-red-200 text-red-600 px-6 py-4 rounded-2xl flex items-center gap-3 animate-fade-in">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                      {error}
+                    </div>
+                  )}
+
+                  {success && (
+                    <div className="bg-green-50 border border-green-200 text-green-700 px-6 py-4 rounded-2xl flex items-center gap-4 animate-fade-in">
+                      <div className="bg-green-100 p-2 rounded-full">
+                         <FiCheckCircle className="text-xl" />
                       </div>
+                      <div>
+                        <p className="font-bold">Message sent successfully!</p>
+                        <p className="text-sm text-green-600">We'll get back to you shortly.</p>
+                      </div>
+                    </div>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full px-8 py-5 bg-slate-900 text-white rounded-full font-bold flex items-center justify-center gap-3 hover:bg-brand-blue transition-all duration-300 disabled:bg-slate-300 disabled:cursor-not-allowed transform hover:-translate-y-1 shadow-lg hover:shadow-brand-blue/30"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <FiLoader className="animate-spin text-xl" />
+                        <span>Sending Message...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Send Message</span>
+                        <FiSend className="text-lg" />
+                      </>
                     )}
-
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full md:w-auto px-8 py-3 bg-brand-blue text-white rounded-xl font-medium flex items-center justify-center gap-2 hover:bg-[#1a5b4a] transition-colors disabled:bg-gray-400"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <FiLoader className="animate-spin" />
-                          <span>Sending...</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>Send Message</span>
-                          <FiSend className='text-white -rotate-45' />
-                        </>
-                      )}
-                    </button>
-                  </form>
-                </div>
-              </div>
-
-              {/* Information Cards Section */}
-              <div className="flex flex-col gap-6">
-                <div className="relative rounded-3xl overflow-hidden shadow-lg p-6 h-auto min-h-[300px] flex items-end"
-                     style={{backgroundImage: `url('/images/hero.png')`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-                  <div className="absolute inset-0 bg-black opacity-40"></div>
-                  <div className="relative z-10 text-white p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-2xl font-bold">Daniel One Four</span>
-                    </div>
-                    <h3 className="text-3xl md:text-4xl font-semibold leading-tight">
-                      Our experts will help you
-                    </h3>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 gap-6">
-                  <div className="bg-brand-lightBlue p-6 rounded-2xl flex items-start gap-4 shadow-sm">
-                    <div className="w-12 h-12 flex items-center justify-center bg-white rounded-full">
-                      <FiMail className="text-brand-blue text-xl" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="text-lg font-semibold text-gray-800">Email</h4>
-                      <p className="text-gray-600">danielonefour14@gmail.com
-
-</p>
-                    </div>
-                  </div>
-
-                  <div className="bg-brand-blue p-6 rounded-2xl flex items-start gap-4 shadow-sm">
-                    <div className="w-12 h-12 flex items-center justify-center bg-white rounded-full">
-                      <FiPhone className="text-brand-blue text-xl" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="text-lg font-semibold text-gray-100">Call</h4>
-                      <p className="text-gray-100">+31612671297</p>
-                    </div>
-                  </div>
-
-                  <div className="bg-brand-lightBlue p-6 rounded-2xl flex items-start gap-4 shadow-sm">
-                    <div className="w-12 h-12 flex items-center justify-center bg-white rounded-full">
-                      <FiMapPin className="text-brand-blue text-xl" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="text-lg font-semibold text-gray-800">Address</h4>
-                      <p className="text-gray-600">Lagos, Nigeria, BA 80301</p>
-                    </div>
-                  </div>
-
-                  <div className="bg-brand-lightBlue p-6 rounded-2xl flex items-start gap-4 shadow-sm">
-                    <div className="w-12 h-12 flex items-center justify-center bg-white rounded-full">
-                      <FiClock className="text-brand-blue text-xl" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="text-lg font-semibold text-gray-800">Working Hours</h4>
-                      <p className="text-gray-600">Mon-Fri: 9:00 AM - 6:00 PM</p>
-                    </div>
-                  </div>
-                </div>
+                  </button>
+                </form>
               </div>
             </div>
           </div>
