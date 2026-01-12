@@ -22,11 +22,9 @@ function Header() {
   };
 
   const navLinks = [
+    { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
-    { name: "The Visionary", path: "/#about-me" },
     { name: "Services", path: "/services" },
-    { name: "The Book", path: "/#book" },
-    { name: "Events", path: "/events" },
     { name: "Blog", path: "/blog" },
     { name: "Contact Us", path: "/contact" },
   ];
@@ -218,7 +216,7 @@ function Header() {
         ref={mobileMenuRef}
         className={`md:hidden fixed top-0 right-0 w-full h-screen bg-brand-yellow shadow-2xl z-50 transform transition-transform duration-500
           ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}
-          flex flex-col pt-10 pb-8 px-7 space-y-10 overflow-y-auto text-white
+          flex flex-col pt-10 pb-8 px-7 space-y-6 overflow-y-auto text-white
         `}
         style={{
           borderTopLeftRadius: 0,
@@ -256,13 +254,13 @@ function Header() {
           </button>
         </div>
 
-        <nav className="flex flex-col gap-4">
+        <nav className="flex flex-col gap-2">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.path}
               onClick={closeMobileMenu}
-              className={`block text-2xl font-semibold tracking-wide px-0 py-1 rounded-lg transition-all duration-200 text-left ${
+              className={`block text-2xl font-bold tracking-normal px-0 py-2 rounded-lg transition-all duration-200 text-left ${
                 pathname === link.path
                   ? "text-brand-blue"
                   : "text-[#1f2937] hover:text-brand-primary"

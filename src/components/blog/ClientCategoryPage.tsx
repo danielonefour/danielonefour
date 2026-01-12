@@ -305,7 +305,7 @@ export default function ClientCategoryPage({
     
     return (
       <>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {blogResponse.items.map(post => (
             <BlogCard key={post.id} post={post} />
           ))}
@@ -324,7 +324,7 @@ export default function ClientCategoryPage({
 
   return (
     <section id="blog-section" className="py-16 md:py-24">
-      <div className="container mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-10">
           {/* Left Column - Blog Posts */}
           <div className="lg:w-2/3">
@@ -337,8 +337,11 @@ export default function ClientCategoryPage({
           {/* Right Column - Categories & Contact */}
           <div className="lg:w-1/3">
             {/* Blog Categories */}
-            <div className="bg-header-bg p-8 mb-8">
-              <h3 className="text-xl font-bold mb-6">Blog Categories</h3>
+            <div className="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 mb-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="h-8 w-1 bg-brand-orange rounded-full"></div>
+                <h3 className="text-xl font-bold text-slate-900">Categories</h3>
+              </div>
               
               {isBlogLoading ? (
                 <div className="flex justify-center py-4">
@@ -352,20 +355,22 @@ export default function ClientCategoryPage({
                   />
                 </div>
               ) : initialCategories.length === 0 ? (
-                <p className="text-gray-600 text-center py-2">No categories found</p>
+                <p className="text-slate-500 text-center py-2 italic">No categories found</p>
               ) : (
-                <ul className="space-y-4">
+                <ul className="space-y-3">
                   {initialCategories.map((cat: Category, index: number) => (
-                    <li key={index} className="flex justify-between items-center">
+                    <li key={index}>
                       <Link 
                         href={`/blog/category/${cat.name.toLowerCase().replace(/\s+/g, '-')}`} 
-                        className={`hover:font-bold transition-all ${
-                          cat.name.toLowerCase() === categoryDisplay.toLowerCase() ? 'font-bold' : ''
+                        className={`flex justify-between items-center group py-2 border-b border-transparent hover:border-slate-100 transition-all ${
+                          cat.name.toLowerCase() === categoryDisplay.toLowerCase() ? 'text-brand-orange font-bold' : 'text-slate-600 hover:text-brand-blue'
                         }`}
                       >
-                        {cat.name}
+                        <span>{cat.name}</span>
+                        <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
+                           cat.name.toLowerCase() === categoryDisplay.toLowerCase() ? 'bg-brand-orange/10 text-brand-orange' : 'bg-slate-100 text-slate-500 group-hover:bg-brand-blue/10 group-hover:text-brand-blue'
+                        }`}>{cat.count}</span>
                       </Link>
-                      <span className="text-gray-700">{cat.count}</span>
                     </li>
                   ))}
                 </ul>
@@ -373,8 +378,11 @@ export default function ClientCategoryPage({
             </div>
 
             {/* Popular Tags */}
-            <div className="bg-gray-50 p-8 mb-8">
-              <h3 className="text-xl font-bold mb-6">Popular Tags</h3>
+            <div className="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 mb-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="h-8 w-1 bg-brand-orange rounded-full"></div>
+                <h3 className="text-xl font-bold text-slate-900">Popular Tags</h3>
+              </div>
               
               {isBlogLoading ? (
                 <div className="flex justify-center py-4">
@@ -397,7 +405,7 @@ export default function ClientCategoryPage({
                     <Link 
                       key={index}
                       href={`/blog/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`}
-                      className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-full text-sm transition-colors"
+                      className="px-4 py-2 bg-slate-50 hover:bg-brand-blue hover:text-white text-slate-600 rounded-full text-xs font-bold uppercase tracking-wide transition-all duration-300 border border-slate-100"
                     >
                       #{tag}
                     </Link>
@@ -407,64 +415,72 @@ export default function ClientCategoryPage({
             </div>
 
             {/* Contact Info */}
-            <div className="mb-8">
-              <h3 className="text-xl font-bold mb-6">Get In Touch With Us</h3>
-              
-              <div className="space-y-4">
-                <div>
-                  <div className="flex items-center mb-2">
-                    <FiMail className="mr-2" />
-                    <span className="font-medium">Info@Example.Com</span>
-                  </div>
-                  <p className="text-gray-600 pl-6">Contact@Example.Com</p>
-                </div>
+            <div className="bg-brand-blue p-8 rounded-3xl shadow-lg mb-8 text-white relative overflow-hidden">
+               <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-10 -mt-10 blur-2xl"></div>
+               <div className="relative z-10">
+                <h3 className="text-xl font-bold mb-6 border-b border-white/20 pb-4">Get In Touch</h3>
                 
-                <div>
-                  <div className="flex items-center mb-2">
-                    <FiPhone className="mr-2" />
-                    <span className="font-medium">+668 66 448 6452 99</span>
+                <div className="space-y-5">
+                  <div>
+                    <div className="flex items-center mb-1 text-brand-yellow font-medium">
+                      <FiMail className="mr-3" />
+                      <span>Email Us</span>
+                    </div>
+                    <p className="pl-7 text-white/90 text-sm break-all">info@danielonefour.com</p>
                   </div>
-                  <p className="text-gray-600 pl-6">+7896 875 987 54</p>
+                  
+                  <div>
+                    <div className="flex items-center mb-1 text-brand-yellow font-medium">
+                      <FiPhone className="mr-3" />
+                      <span>Call Us</span>
+                    </div>
+                    <p className="pl-7 text-white/90 text-sm">+668 66 448 6452 99</p>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Download Buttons */}
             <div className="space-y-4 mb-8">
-              <Link href="#" className="flex items-center justify-between p-6 border border-gray-200 hover:bg-gray-50 transition-colors">
+              <Link href="#" className="flex items-center justify-between p-6 bg-white rounded-2xl border border-slate-100 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all group">
                 <div className="flex items-center">
-                  <FiDownload className="mr-4 text-xl" />
+                  <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center mr-4 group-hover:bg-brand-blue group-hover:text-white transition-colors">
+                     <FiDownload className="text-lg" />
+                  </div>
                   <div>
-                    <p className="font-medium">Download</p>
-                    <p>Brochure</p>
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Download</p>
+                    <p className="font-bold text-slate-900">Brochure</p>
                   </div>
                 </div>
-                <div className="text-3xl">↓</div>
               </Link>
               
-              <Link href="#" className="flex items-center justify-between p-6 bg-black text-white">
+              <Link href="#" className="flex items-center justify-between p-6 bg-slate-900 text-white rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
                 <div className="flex items-center">
-                  <FiFilePlus className="mr-4 text-xl" />
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 group-hover:bg-brand-yellow group-hover:text-slate-900 transition-colors">
+                    <FiFilePlus className="text-lg" />
+                  </div>
                   <div>
-                    <p className="font-medium">Latest</p>
-                    <p>Articles</p>
+                    <p className="text-xs font-bold text-white/60 uppercase tracking-wider">Latest</p>
+                    <p className="font-bold">Articles</p>
                   </div>
                 </div>
-                <div className="text-3xl">↓</div>
               </Link>
             </div>
             
             {/* How to Contact Section */}
-            <Link href="/contact" className="block bg-header-bg p-8 hover:bg-header-bg/80 transition-colors">
+            <Link href="/contact" className="block bg-brand-yellow p-8 rounded-3xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center group-hover:scale-110 transition-transform">
                   <FiMessageCircle className="text-white text-xl" />
                 </div>
-                <h3 className="text-xl font-bold">How can I contact<br />Daniel-One-Four</h3>
+                <h3 className="text-xl font-black text-slate-900 leading-tight">Start Your<br />Journey</h3>
               </div>
-              <p className="text-gray-700">
-                Get in touch with our team today to discuss your coaching needs and discover how we can help you achieve your goals.
+              <p className="text-slate-800 font-medium text-sm leading-relaxed mb-4">
+                Ready to transform your leadership skills? Get in touch with our team today.
               </p>
+              <span className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-slate-900 border-b-2 border-slate-900 pb-0.5">
+                Contact Us <FiChevronRight className="ml-1" />
+              </span>
             </Link>
           </div>
         </div>

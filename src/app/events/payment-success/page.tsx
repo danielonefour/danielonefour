@@ -26,7 +26,7 @@ export default function PaymentSuccessPage() {
           ]}
         />
         
-        <div className="container mx-auto px-4 py-16">
+        <div className="max-w-7xl mx-auto px-4 py-16">
           <div className="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-md">
             <div className="text-center">
               <FiCheckCircle className="mx-auto text-green-500" size={64} />

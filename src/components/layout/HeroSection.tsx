@@ -1,7 +1,5 @@
-"use client";
-
-import React from "react";
-import { Crown } from 'lucide-react';
+import Image from "next/image";
+import { FaCrown } from "react-icons/fa";
 
 export default function HeroSection() {
   const stats = [
@@ -23,7 +21,7 @@ export default function HeroSection() {
           <header className="space-y-6">
 
             <div className="flex items-center space-x-3 text-zinc-200 mt-5">
-              <Crown className="h-7 w-7" />
+              <FaCrown className="h-7 w-7" />
               <span className="text-sm font-bold tracking-widest uppercase zinc-700">
                 School Of Leadership & Etiquette
               </span>
@@ -52,10 +50,13 @@ export default function HeroSection() {
         {/* Right Image */}
         <div className="relative h-[400px] md:h-[500px] lg:h-[550px]" data-aos="fade-left" data-aos-delay="200">
           <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
-            <img
+            <Image
               src="/images/author/leader-chess.jpg"
               alt="Oyinkansola Adedapo - Leadership Coach"
-              className="w-full h-full object-cover object-top"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover object-top"
             />
             {/* Image Overlay */}
             <div className="absolute inset-0 bg-neutral-900 opacity-20 transition-opacity duration-300"></div>

@@ -158,7 +158,7 @@ const TeamSection = () => {
 
   return (
     <section className="py-16 md:py-24 bg-light-gray overflow-hidden">
-      <div className="container mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16 relative">
           <div className="flex justify-center items-center mb-4">
             <button 

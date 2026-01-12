@@ -5,20 +5,35 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Service } from '@/lib/contentful';
 
+import { FiBriefcase, FiUsers, FiTrendingUp, FiTarget, FiAward, FiZap } from 'react-icons/fi';
+
 interface ServicesSectionProps {
   initialServices?: Service[];
 }
 
+const ServiceIcon = ({ index }: { index: number }) => {
+  const icons = [
+    FiBriefcase,
+    FiUsers,
+    FiTrendingUp,
+    FiTarget,
+    FiAward,
+    FiZap
+  ];
+  const Icon = icons[index % icons.length];
+  return <Icon className="w-16 h-16" />;
+};
+
 const ServicesSection = ({ initialServices = [] }: ServicesSectionProps) => {
   return (
-    <section className="py-24 bg-zinc-50 overflow-hidden" id="services">
-      <div className="container mx-auto px-6">
+    <section className="py-24 bg-brand-yellow overflow-hidden" id="services">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-20 space-y-4" data-aos="fade-up">
           <span className="inline-block px-4 py-1.5 bg-brand-orange/10 text-brand-orange font-bold text-xs tracking-widest uppercase rounded-full">
             Our Expertise
           </span>
           <h2 className="text-4xl md:text-6xl font-black text-slate-900 leading-tight">
-            How We <span className="text-brand-blue">Empower</span> You
+            Our <span className="text-brand-blue">Services</span>
           </h2>
           <p className="text-slate-600 text-lg">
             We provide specialized coaching, training, and consulting services designed to elevate your personal and professional impact.
@@ -26,7 +41,7 @@ const ServicesSection = ({ initialServices = [] }: ServicesSectionProps) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {initialServices.map((service, index) => (
+          {initialServices.slice(0, 6).map((service, index) => (
             <div 
               key={service.id || service.slug} 
               className="group bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:border-brand-blue/20 transition-all duration-500 flex flex-col h-full"
@@ -42,8 +57,8 @@ const ServicesSection = ({ initialServices = [] }: ServicesSectionProps) => {
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                 ) : (
-                  <div className="w-full h-full bg-brand-blue/5 flex items-center justify-center text-brand-blue/20">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                  <div className="w-full h-full bg-brand-blue/5 flex items-center justify-center text-brand-blue/20 group-hover:bg-brand-blue/10 group-hover:text-brand-blue transition-colors duration-300">
+                    <ServiceIcon index={index} />
                   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

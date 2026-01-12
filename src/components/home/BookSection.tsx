@@ -12,8 +12,8 @@ export default function BookSection() {
           {/* Left: Book Cover */}
           <div className="relative w-full flex justify-center lg:justify-start" data-aos="fade-right">
             <div className="relative group lg:-ml-10">
-              {/* Shadow effect */}
-              <div className="absolute -inset-4 bg-brand-blue/10 rounded-3xl blur-2xl group-hover:bg-brand-blue/20 transition-all duration-500"></div>
+              {/* Invisible shadow placeholder */}
+              <div className="absolute -inset-4 bg-white/0 rounded-3xl blur-2xl group-hover:bg-brand-blue/10 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
               
               <Image
                 src="/book-cover.png"
@@ -32,7 +32,7 @@ export default function BookSection() {
               <h2 className="text-brand-blue font-bold tracking-widest uppercase text-sm">
                 Published Work
               </h2>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold text-slate-900 leading-tight">
                 Time Stamp: <span className="text-brand-orange">Fill Your Titles With Life</span>
               </h1>
             </div>

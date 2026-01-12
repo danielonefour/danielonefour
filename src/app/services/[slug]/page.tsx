@@ -35,13 +35,13 @@ export async function generateStaticParams() {
 }
 
 interface ServicePageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
-  const slug = params.slug;
+  const { slug } = await params;
   const service = await getServiceBySlug(slug);
   
   if (!service) {
@@ -65,7 +65,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
 
 export default async function ServicePage({ params }: ServicePageProps) {
   // Fetch the initial data on the server for SEO and fast initial load
-  const slug = params.slug;
+  const { slug } = await params;
   const [service, allServices] = await Promise.all([
     getServiceBySlug(slug),
     getAllServices()

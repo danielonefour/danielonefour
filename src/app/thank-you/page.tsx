@@ -23,7 +23,7 @@ const ThankYouLoading = () => (
         ]}
       />
       <section className="py-16 md:py-24">
-        <div className="container mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center">
             <div className="animate-pulse">
               <div className="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-8"></div>
@@ -68,7 +68,7 @@ const ThankYouContent = () => {
         />
         
         <section className="py-16 md:py-24">
-          <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="max-w-3xl mx-auto text-center">
               <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
                 <FiCheck className="text-green-600 text-4xl" />

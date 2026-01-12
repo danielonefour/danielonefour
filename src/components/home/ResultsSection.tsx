@@ -29,7 +29,7 @@ const ResultsSection = () => {
   if (isLoading) {
     return (
       <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[...Array(4)].map((_, index) => (
               <div key={index} className="bg-white p-8 rounded-lg shadow-md animate-pulse h-48">
@@ -47,7 +47,7 @@ const ResultsSection = () => {
   if (error) {
     return (
       <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <p className="text-center text-red-500">{error}</p>
         </div>
       </section>
@@ -60,7 +60,7 @@ const ResultsSection = () => {
 
   return (
     <section className="py-16 bg-gray-50">
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {results.map((result) => (
             <div key={result.id} className="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow">

@@ -141,10 +141,11 @@ export async function generateMetadata() {
 export default async function EventsPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  // Parse the page parameter safely, ensuring it's properly awaited
-  const pageParam = searchParams?.page || '1';
+  const awaitedSearchParams = await searchParams;
+  // Parse the page parameter safely
+  const pageParam = awaitedSearchParams?.page || '1';
   const currentPage = Number(Array.isArray(pageParam) ? pageParam[0] : pageParam);
   
   const { items: events, total } = await getAllEvents(currentPage, EVENTS_PER_PAGE);
@@ -163,7 +164,7 @@ export default async function EventsPage({
           ]}
         />
         
-        <div className="container mx-auto px-4 py-16">
+        <div className="max-w-7xl mx-auto px-4 py-16">
           <h1 className="text-3xl md:text-4xl font-bold mb-8">Upcoming Events</h1>
           
           {events.length === 0 ? (

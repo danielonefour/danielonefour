@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
-import HoleButton from '@/components/ui/HoleButton';
 import aboutImage from '@/assets/images/about.jpg';
 import { getFeaturedClients, Client } from '@/lib/contentful-clients';
 import { getAllResults, Result } from '@/lib/contentful-results';
@@ -81,9 +81,9 @@ const ClientsSection = () => {
   }, [totalSlides]);
 
   return (
-    <section className="bg-brand-orange py-16 md:py-24">
+    <section className="bg-white py-16 md:py-24">
       {/* About Section */}
-      <div className="container mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
           {/* Left Content - Image */}
           <div className="relative flex-1 w-full lg:w-1/2">
@@ -92,6 +92,7 @@ const ClientsSection = () => {
                 src={aboutImage}
                 alt="Life Coach"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 style={{ objectFit: 'cover' }}
                 className="transition-transform duration-500 group-hover:scale-105"
               />
@@ -101,27 +102,28 @@ const ClientsSection = () => {
           </div>
           
           {/* Right Content - Text */}
-          <div className="flex-1 w-full lg:w-1/2 lg:mt-0 text-white">
+          <div className="flex-1 w-full lg:w-1/2 lg:mt-0 text-slate-900">
             {companyDetails ? (
             <>
-            <span className="inline-block px-3 py-1 mb-4 text-xs sm:text-sm font-semibold tracking-wide text-zinc-700 bg-brand-orange/10 rounded-full uppercase">
+            <span className="inline-block px-3 py-1 mb-4 text-xs sm:text-sm font-semibold tracking-wide text-brand-blue bg-brand-blue/10 rounded-full uppercase">
               About Us
             </span>
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-zinc-700 leading-tight mb-6">
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-slate-900 leading-tight mb-6">
               {companyDetails?.introTitle}
             </h2>
-            <div className="mb-8 text-lg text-zinc-700 space-y-4">
+            <div className="mb-8 text-lg text-slate-600 space-y-4">
               <p>
                 {companyDetails?.introDescription}
               </p>
             </div>
             
-            <HoleButton 
+            <Link 
               href="/contact"
-              bgColorClass="bg-brand-orange"
+              className="inline-flex items-center gap-2 bg-brand-blue text-white font-bold px-10 py-4 rounded-full shadow-lg hover:bg-brand-yellow hover:text-slate-900 transition-all duration-300 transform hover:-translate-y-1"
             >
-              <span className="mr-4">Get in touch</span>
-            </HoleButton>
+              Get in touch
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </Link>
             </>
             ) : (
               // Add a loading skeleton

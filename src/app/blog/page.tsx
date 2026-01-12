@@ -5,7 +5,7 @@ import { getAllBlogPosts } from '@/lib/contentful';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import PageHeader from '@/components/layout/PageHeader';
-import aboutImage from '@/assets/images/about.png';
+
 import ClientBlogPage from '@/components/blog/ClientBlogPage';
 
 export const metadata: Metadata = {
@@ -16,10 +16,11 @@ export const metadata: Metadata = {
 export default async function BlogPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  const awaitedSearchParams = await searchParams;
   // Get the current page from the URL
-  const pageParam = searchParams?.page;
+  const pageParam = awaitedSearchParams?.page;
   const currentPage = pageParam 
     ? parseInt(Array.isArray(pageParam) ? pageParam[0] : pageParam) 
     : 1;
@@ -44,7 +45,7 @@ export default async function BlogPage({
       <main>
         <PageHeader 
           title="Our Blog" 
-          image={aboutImage}
+          image="/images/author/leader-chess.jpg"
           breadcrumbs={breadcrumbs}
         />
         

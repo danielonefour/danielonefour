@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import PageHeader from '@/components/layout/PageHeader';
-import aboutImage from '@/assets/images/about.png';
+
 import ClientServicesPage from '@/components/services/ClientServicesPage';
 
 export const metadata: Metadata = {
@@ -28,7 +28,7 @@ export default async function ServicesPage() {
       <main>
         <PageHeader 
           title="Our Services" 
-          image={aboutImage}
+          image="/images/author/leader-chess.jpg"
           breadcrumbs={breadcrumbs}
         />
 
